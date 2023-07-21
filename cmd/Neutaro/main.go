@@ -5,7 +5,7 @@ import (
 
 	svrcmd "github.com/cosmos/cosmos-sdk/server/cmd"
 	"github.com/ignite-hq/cli/ignite/pkg/cosmoscmd"
-	"github.com/Timpi-official/Timpi-ChainTN/app"
+	"github.com/Neutaro/Neutaro-Chain/app"
 )
 
 func main() {

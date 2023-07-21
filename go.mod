@@ -1,4 +1,4 @@
-module github.com/Timpi-official/Timpi-ChainTN
+module github.com/Neutaro/Neutaro-Chain
 
 go 1.16
 

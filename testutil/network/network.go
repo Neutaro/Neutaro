@@ -18,7 +18,7 @@ import (
 	tmrand "github.com/tendermint/tendermint/libs/rand"
 	tmdb "github.com/tendermint/tm-db"
 
-	"github.com/Timpi-official/Timpi-ChainTN/app"
+	"github.com/Neutaro/Neutaro-Chain/app"
 )
 
 type (
