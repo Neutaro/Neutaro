@@ -1,0 +1,33 @@
+genesis:
+  app_state:
+    staking:
+      params:
+        bond_denom: "utimpi"
+    # mint:
+    #   params:
+    #     mint_denom: "utimpi"
+    gov:
+      deposit_params:
+        min_deposit: [
+          denom: "utimpi"
+          amount: "4000000000"]
+        max_deposit_period: "172800000000ns"
+      voting_params:
+        voting_period: "172800000000ns"
+chain_id: "timpitest"
+accounts:
+  - name: alice
+    coins: ["3000000000timpi", "3000000000000utimpi"]
+  - name: bob
+    coins: ["1000000000timpi", "1000000000000utimpi"]
+validator:
+  name: alice
+  staked: "100000000000utimpi"
+client:
+  openapi:
+    path: "docs/static/openapi.yml"
+  vuex:
+    path: "vue/src/store"
+faucet:
+  name: bob
+  coins: ["5timpi", "100000000utimpi"]
