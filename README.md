@@ -71,7 +71,7 @@ sed -i -e "s/^pruning-interval *=.*/pruning-interval = \ <br>
 \"$PRUNING_INTERVAL\"/" $HOME/.Neutaro/config/app.toml
 
 
-### Create Neutaro service. Copy/paste everything from sudo to EOF.
+### Create Neutaro service. Copy/paste everything from sudo to 2nd EOF.
 
 sudo tee /etc/systemd/system/Neutaro.service > /dev/null << EOF
 [Unit]
