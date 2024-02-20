@@ -56,16 +56,17 @@ Neutaro config keyring-backend os <br>
 
 curl http://154.26.153.186/genesis.json > \$HOME/.Neutaro/config/genesis.json <br>
 
-### How you can adjust the minimum-gas-price. 
-You can edit the file $HOME/.Neutaro/config/app.toml to change the minimum-gas-prices. Currently most use 0. <br>
+### Editing the app.toml file
+You can edit the file $HOME/.Neutaro/config/app.toml to change the minimum-gas-prices ( Currently most use 0 ) and the pruning. <br>
 minimum-gas-prices = "0uneutaro" <br>
-
-### Configuring pruning
-You could add whatever you like. These options mainly decide how much storage the Node will use. An example would be using<br>
-
+<br>
+For pruning you could add whatever you like. These options mainly decide how much storage the Node will use. An example would be using<br>
 pruning="custom" <br>
 pruning-keep-recent="100" <br>
 pruning-interval="19" <br>
+
+### Configuring the config.toml
+The file is in $HOME/.Neutaro/config/config.toml. Here you edit the "persistent_peers" to persistent_peers = "2fd06277f46e845ca73df8f81caf68e6579bbe32@86.48.20.122:26656". <br>
 
 ### Create Neutaro service. Copy/paste everything from sudo to 2nd EOF.
 
