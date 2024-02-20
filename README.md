@@ -33,10 +33,10 @@ go version
 
 ### Then we install the Neutaro Binary
 
-cd $HOME
-git clone https://github.com/Neutaro/Neutaro
-cd Neutaro/cmd/Neutaro/
-go build
+cd $HOME <br> 
+git clone https://github.com/Neutaro/Neutaro <br>
+cd Neutaro/cmd/Neutaro/ <br>
+go build <br>
 
 ### installing cosmovisor
 
