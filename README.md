@@ -73,12 +73,12 @@ sed -i -e "s/^pruning-interval *=.*/pruning-interval = \ <br>
 
 ### Create Neutaro service. Copy/paste everything from sudo to 2nd EOF.
 
-sudo tee /etc/systemd/system/Neutaro.service > /dev/null << EOF
-[Unit]
-Description=Neutaro Node Service
-After=network-online.target
+sudo tee /etc/systemd/system/Neutaro.service > /dev/null << EOF  <br>
+[Unit]  <br>
+Description=Neutaro Node Service  <br>
+After=network-online.target  <br>
 
-[Service]
+[Service]  <br>
 User=$USER <br>
 ExecStart=$(which cosmovisor) run start <br>
 Restart=on-failure <br>
