@@ -10,12 +10,11 @@ By delegating your tokens to a validator you increase the amount of staked token
 Neutaro tx staking delegate ValidatorAddress 1000000uneutaro --from YOURWALLET --chain-id Neutaro-1 --node https://rpc1.neutaro.tech:443
 
 # Running a node
-Running a node means that you run the chains binary. Follow these steps to create a Validator that runs as a service on linux.
+Running a node means that you run the chains binary. Follow these steps to create a Validator that runs as a service on linux. _**There currently is no snapshot! Syncing a node will take hours. We will provide a snapshot very soon.**_
 
 ### First we update linux.
-we suggest using Ubuntu 22.04.03.
-
-sudo apt update && sudo apt upgrade -y && sudo apt install curl tar wget clang pkg-config libssl-dev jq build-essential bsdmainutils git make ncdu gcc git jq chrony liblz4-tool -y
+we suggest using Ubuntu 22.04.03. <br>
+sudo apt update && sudo apt upgrade -y && sudo apt install curl tar wget clang pkg-config libssl-dev jq build-essential bsdmainutils git make ncdu gcc git jq chrony liblz4-tool -y <br>
 
 ### Installing Go v1.20.4
 ver="1.20.4" <br>
@@ -38,7 +37,7 @@ git clone https://github.com/Neutaro/Neutaro <br>
 cd Neutaro/cmd/Neutaro/ <br>
 go build <br>
 
-### installing cosmovisor
+### Installing cosmovisor
 
 mkdir -p $HOME/.Neutaro/cosmovisor/genesis/bin <br>
 mv $HOME/Neutaro/cmd/Neutaro/Neutaro $HOME/.Neutaro/cosmovisor/genesis/bin/ <br>
