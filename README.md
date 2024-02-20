@@ -58,13 +58,14 @@ curl http://154.26.153.186/genesis.json > \$HOME/.Neutaro/config/genesis.json <b
 
 ### How you can adjust the minimum-gas-price. 
 You can edit the file $HOME/.Neutaro/config/app.toml to change the minimum-gas-prices. Currently most use 0. <br>
+minimum-gas-prices = "0uneutaro" <br>
 
 ### Configuring pruning
 You could add whatever you like. These options mainly decide how much storage the Node will use. An example would be using<br>
 
-PRUNING="custom" <br>
-PRUNING_KEEP_RECENT="100" <br>
-PRUNING_INTERVAL="19" <br>
+pruning="custom" <br>
+pruning-keep-recent="100" <br>
+pruning-interval="19" <br>
 
 ### Create Neutaro service. Copy/paste everything from sudo to 2nd EOF.
 
