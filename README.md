@@ -55,9 +55,6 @@ Neutaro config chain-id Neutaro-1 <br>
 Neutaro config keyring-backend os <br>
 
 curl http://154.26.153.186/genesis.json > \$HOME/.Neutaro/config/genesis.json <br>
-PEERS="$(curl -sS https://rpc1.neutaro.tech/net_info | jq -r '.result.peers[] | "\(.node_info.id)@\(.remote_ip):\(.node_info.listen_addr)"' | awk -F ':' '{print \$1":"\$(NF)}' | sed -z 's|\n|,|g;s|.$||')" <br>
-sed -i -e "s|^persistent_peers *=.*|persistent_peers = \"$PEERS\"|" $HOME/.Neutaro/config/config.toml <br>
-sed -i -e "s/^filter_peers *=.*/filter_peers = \"true\" /" $HOME/.Neutaro/config/config.toml <br>
 
 ### Here you can adjust the minimum-gas-price. Currently most use 0
 sed -i -e "s|^minimum-gas-prices *=.*|minimum-gas-prices = \"0uneutaro\"|" $HOME/.Neutaro/config/app.toml
