@@ -10,7 +10,7 @@ By delegating your tokens to a validator you increase the amount of staked token
 Neutaro tx staking delegate ValidatorAddress 1000000uneutaro --from YOURWALLET --chain-id Neutaro-1 --node https://rpc1.neutaro.tech:443
 
 # Running a node
-Running a node means that you run the chains binary. Follow these steps to create a Validator that runs as a service on linux. _**There currently is no snapshot! Syncing a node will take hours. We will provide a snapshot very soon.**_
+Running a node means that you run the chains binary. Follow these steps to create a Validator that runs as a service on linux.
 
 ### First we update linux.
 we suggest using Ubuntu 22.04.03. <br>
