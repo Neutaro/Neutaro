@@ -12,8 +12,10 @@ Neutaro tx staking delegate ValidatorAddress 1000000uneutaro --from YOURWALLET -
 # Running a node
 Running a node means that you run the chains binary. Follow these steps to create a Validator that runs as a service on linux.
 
-### First we update linux.
-we suggest using Ubuntu 22.04.03. <br>
+### Preperation
+We suggest using Ubuntu 22.04.03, 4 cores and 100gb of free storage. This will increase overtime, but with the suggested pruning and current state of the chain it's fine and it will be fine for a few more months. <br>
+<br>
+Make sure your system is up to date. <br>
 sudo apt update && sudo apt upgrade -y && sudo apt install curl tar wget clang pkg-config libssl-dev jq build-essential bsdmainutils git make ncdu gcc git jq chrony liblz4-tool -y <br>
 
 ### Installing Go v1.20.4
