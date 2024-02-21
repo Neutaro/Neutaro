@@ -86,7 +86,7 @@ The file is in $HOME/.Neutaro/config/config.toml. Here you edit the "persistent_
 ```shell
 cd $Home/root/.Neutaro/
 mv data data-old
-wget http://109.199.106.233/snapshot.tar.lz4
+wget http://109.199.106.233/snapshotNeutaro.tar.lz4
 lz4 -d snapshot.tar.lz4
 tar -xf snapshot.tar
 ```
