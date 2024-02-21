@@ -24,10 +24,9 @@ sudo rm -rf /usr/local/go <br>
 sudo tar -C /usr/local -xzf "go$ver.linux-amd64.tar.gz" <br>
 rm "go$ver.linux-amd64.tar.gz" <br>
 echo "export PATH=$PATH:/usr/local/go/bin:$HOME/go/bin" >> $HOME/.bash_profile <br>
-source $HOME/.bash_profile
-
-### Check the go version
-
+source $HOME/.bash_profile <br>
+<br>
+Make sure version 1.20.4 is installed <br>
 go version
 
 ### Then we install the Neutaro Binary
