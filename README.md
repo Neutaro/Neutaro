@@ -87,8 +87,8 @@ The file is in $HOME/.Neutaro/config/config.toml. Here you edit the "persistent_
 cd $Home/root/.Neutaro/
 mv data data-old
 wget http://109.199.106.233/snapshotNeutaro.tar.lz4
-lz4 -d snapshot.tar.lz4
-tar -xf snapshot.tar
+lz4 -d snapshotNeutaro.tar.lz4
+tar -xf snapshotNeutaro.tar
 ```
 Once the node is running you can delete unnecessary files using
 ```shell
