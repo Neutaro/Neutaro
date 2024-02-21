@@ -60,7 +60,7 @@ go install cosmossdk.io/tools/cosmovisor/cmd/cosmovisor@v1.4.0
 ```
 
 ### Now we configure the node
-
+Make sure to replace "YOURMONIKER" with your actual one.
 ```shell
 MONIKER=YOURMONIKER
 ```
