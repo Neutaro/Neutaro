@@ -119,9 +119,6 @@ WantedBy=multi-user.target
 EOF
 ```
 
-[Install]<br>
-WantedBy=multi-user.target<br>
-EOF <br>
 ### Enabling the Service
 ```shell
 sudo systemctl daemon-reload
