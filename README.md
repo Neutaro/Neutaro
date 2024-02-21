@@ -80,7 +80,7 @@ pruning-keep-recent="100" <br>
 pruning-interval="19" <br>
 
 ### Configuring the config.toml
-The file is in $HOME/.Neutaro/config/config.toml. Here you edit the "persistent_peers" to persistent_peers = "2fd06277f46e845ca73df8f81caf68e6579bbe32@86.48.20.122:26656". <br>
+The file is in $HOME/.Neutaro/config/config.toml. Here you edit the "seeds" to seeds = "0e24a596dc34e7063ec2938baf05d09b374709e6@109.199.106.233:26656". <br>
 
 ### Downloading the snapshot
 ```shell
