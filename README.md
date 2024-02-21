@@ -99,6 +99,7 @@ rm -r data-old
 
 ### Create Neutaro service.
 ```shell
+sudo tee /etc/systemd/system/Neutaro.service > /dev/null << EOF
 [Unit]
 Description=Neutaro Node Service
 After=network-online.target
