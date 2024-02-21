@@ -90,8 +90,8 @@ wget http://109.199.106.233/snapshot.tar.lz4
 lz4 -d snapshot.tar.lz4
 The next step takes a bit of time. you could use -xvf to see the output.
 tar -xf snapshot.tar
-Once the node is running you can delete unnecessary files using
 ```
+Once the node is running you can delete unnecessary files using
 ```shell
 rm -r snapshot.tar
 rm -r snapshot.tar.lz4
