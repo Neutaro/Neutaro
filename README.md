@@ -97,24 +97,26 @@ rm -r snapshotNeutaro.tar.lz4
 rm -r data-old
 ```
 
-
 ### Create Neutaro service.
-Copy everything from sudo to the 2nd EOF. <br>
+```shell
+[Unit]
+Description=Neutaro Node Service
+After=network-online.target
 
-sudo tee /etc/systemd/system/Neutaro.service > /dev/null << EOF<br>
-[Unit]<br>
-Description=Neutaro Node Service<br>
-After=network-online.target<br>
+[Service]
+User=$USER
+ExecStart=$(which cosmovisor) run start
+Restart=on-failure
+RestartSec=10
+LimitNOFILE=65535
+Environment="DAEMON_HOME=$HOME/.Neutaro"
+Environment="DAEMON_NAME=Neutaro"
+Environment="UNSAFE_SKIP_BACKUP=true"
 
-[Service]<br>
-User=$USER<br>
-ExecStart=$(which cosmovisor) run start<br>
-Restart=on-failure<br>
-RestartSec=10<br>
-LimitNOFILE=65535<br>
-Environment="DAEMON_HOME=$HOME/.Neutaro"<br>
-Environment="DAEMON_NAME=Neutaro"<br>
-Environment="UNSAFE_SKIP_BACKUP=true"<br>
+[Install]
+WantedBy=multi-user.target
+EOF
+```
 
 [Install]<br>
 WantedBy=multi-user.target<br>
