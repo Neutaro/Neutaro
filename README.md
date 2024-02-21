@@ -154,5 +154,5 @@ Neutaro keys add WALLET --keyring-backend os --recover
 once you have a funded wallet on the node send this, **__but make sure to check all the parameters to see if they are fine for you!__** <br>
 <br>
 ```shell
-Neutaro tx staking create-validator --amount=1500000uneutaro --pubkey=$(Neutaro tendermint show-validator) --moniker=$MONIKER --identity="79E14FB4E5BE4F30" --chain-id=Neutaro-1 --from WALLET --keyring-backend os --commission-rate="0.10" --commission-max-rate="0.20" --commission-max-change-rate="0.01" --min-self-delegation="1000000" --gas="auto" --gas-prices="0.0025uneutaro" --gas-adjustment="1.5"
+Neutaro tx staking create-validator --amount=1000000uneutaro --pubkey=$(Neutaro tendermint show-validator) --moniker=$MONIKER --chain-id=Neutaro-1 --from WALLET --keyring-backend os --commission-rate="0.10" --commission-max-rate="0.20" --commission-max-change-rate="0.01" --min-self-delegation="1000000" --gas="auto" --gas-prices="0.0025uneutaro" --gas-adjustment="1.5"
 ```
