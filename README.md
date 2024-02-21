@@ -99,7 +99,8 @@ rm -r data-old
 
 
 ### Create Neutaro service.
-```shell
+Copy everything from sudo to the 2nd EOF. <br>
+
 sudo tee /etc/systemd/system/Neutaro.service > /dev/null << EOF
 [Unit]
 Description=Neutaro Node Service
@@ -118,7 +119,6 @@ Environment="UNSAFE_SKIP_BACKUP=true"
 [Install]
 WantedBy=multi-user.target
 EOF 
-```
 ### Enabling the Service
 ```shell
 sudo systemctl daemon-reload
