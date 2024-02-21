@@ -68,7 +68,7 @@ MONIKER=YOURMONIKER
 Neutaro init $MONIKER --chain-id Neutaro-1
 Neutaro config chain-id Neutaro-1
 Neutaro config keyring-backend os
-curl http://154.26.153.186/genesis.json > \$HOME/.Neutaro/config/genesis.json
+curl http://154.26.153.186/genesis.json > $HOME/.Neutaro/config/genesis.json
 ```
 ### Editing the app.toml file
 You can edit the file $HOME/.Neutaro/config/app.toml to change the minimum-gas-prices ( Currently most use 0 ) and the pruning. <br>
