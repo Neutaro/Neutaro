@@ -67,6 +67,19 @@ pruning-interval="19" <br>
 ### Configuring the config.toml
 The file is in $HOME/.Neutaro/config/config.toml. Here you edit the "persistent_peers" to persistent_peers = "2fd06277f46e845ca73df8f81caf68e6579bbe32@86.48.20.122:26656". <br>
 
+### Downloading the snapshot
+
+cd $Home/root/.Neutaro/ <br>
+mv data data-old <br>
+wget http://109.199.106.233/snapshot.tar.lz4 <br>
+lz4 -d snapshot.tar.lz4 <br>
+The next step takes a bit of time. you could use -xvf to see the output. <br>
+tar -xf snapshot.tar <br>
+Once the node is running you can delete unnecessary files using <br>
+rm -r snapshot.tar <br>
+rm -r snapshot.tar.lz4 <br>
+rm -r data-old <br>
+
 ### Create Neutaro service. Copy/paste everything from sudo to 2nd EOF.
 
 sudo tee /etc/systemd/system/Neutaro.service > /dev/null << EOF  <br>
@@ -105,8 +118,7 @@ use ctrl + c to exit the log
 Neutaro status 2>&1 | jq .SyncInfo
 
 ### **Proceed once it's synced**
-you will be asked for your memonic on this step. You can also remove the --recover flag and create a new wallet and send funds to this new wallet from your main wallet
-<br>
+you will be asked for your memonic on this step. You can also remove the --recover flag and create a new wallet and send funds to this new wallet from your main wallet. You can now delete the files using the commands from the snapshot section. <br>
 <br>
 Neutaro keys add WALLET --keyring-backend os --recover 
 
