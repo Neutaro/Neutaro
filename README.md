@@ -8,7 +8,7 @@ You can be a part of Neutaro by having tokens and delegating those, running a no
 By delegating your tokens to a validator you increase the amount of staked tokens they have and by that their voting power. In return you get a cut of their rewards based on the amount you have delegated. You can delegate to a Validator using the command. 1.000.000 uneutaro is 1 NTMPI. if you want to stake 100 NTMPI tokens you put **100000000uneutaro** into the command. The example is 1 token.
 
 ```shell
-Neutaro tx staking delegate ValidatorAddress 1000000uneutaro --from YOURWALLET --chain-id Neutaro-1 --node https://rpc1.neutaro.tech:443
+Neutaro tx staking delegate ValidatorAddress 1000000uneutaro --from YOURWALLET --chain-id Neutaro-1
 ```
 
 # Running a node
