@@ -92,8 +92,8 @@ tar -xf snapshotNeutaro.tar
 ```
 Once the node is running you can delete unnecessary files using
 ```shell
-rm -r snapshot.tar
-rm -r snapshot.tar.lz4
+rm -r snapshotNeutaro.tar
+rm -r snapshotNeutaro.tar.lz4
 rm -r data-old
 ```
 
