@@ -41,7 +41,7 @@ Make sure version 1.20.4 is installed <br>
 go version
 ```
 
-### Then we install the Neutaro Binary
+### Installing the Neutaro Binary
 ```shell
 cd $HOME
 git clone https://github.com/Neutaro/Neutaro
