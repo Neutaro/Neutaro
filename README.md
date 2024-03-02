@@ -86,7 +86,7 @@ The file is in $HOME/.Neutaro/config/config.toml. Here you edit the "seeds" to s
 ```shell
 cd $HOME/.Neutaro/
 mv data data-old
-wget http://109.199.106.233/snapshotNeutaro.tar.lz4
+wget https://explorer.neutaro.tech/snapshotNeutaro.tar.lz4
 lz4 -d snapshotNeutaro.tar.lz4
 tar -xf snapshotNeutaro.tar
 ```
