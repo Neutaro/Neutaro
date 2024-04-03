@@ -194,6 +194,25 @@ test-sim-nondeterminism:
 	go test $(SIM_TEST_DIR) -mod=readonly -run TestAppStateDeterminism -Enabled=true \
 		-NumBlocks=100 -BlockSize=200 -Commit=true -Period=0 -v -timeout 24h
 
+
+###############################################################################
+###                                  Serve                                  ###
+###############################################################################
+
+serve:
+	@echo
+	@echo "===========     Serve     ============"
+	@echo
+	./scripts/serve.sh
+	@echo
+	@echo "===========  Serving now  ============"
+	@echo
+
+kill-all:
+	@echo "Killing Neutaro and removing previous data"
+	-@pkill Neutaro 2>/dev/null
+	-@rm -rf /tmp/neutaro-local-1
+
 ###############################################################################
 ###                                Linting                                  ###
 ###############################################################################
