@@ -1,24 +1,43 @@
-package conformance
+package interchaintest
 
 import (
 	"context"
 	"fmt"
-	"testing"
-
+	wasmtypes "github.com/CosmWasm/wasmd/x/wasm/types"
 	"github.com/Neutaro/Neutaro/interchaintest/helpers"
+	"github.com/strangelove-ventures/interchaintest/v7"
 	"github.com/strangelove-ventures/interchaintest/v7/chain/cosmos"
 	"github.com/strangelove-ventures/interchaintest/v7/ibc"
 	"github.com/stretchr/testify/require"
-
-	wasmtypes "github.com/CosmWasm/wasmd/x/wasm/types"
+	"testing"
 )
 
-// Pretty much a direct copy from Juno: https://github.com/CosmosContracts/juno/blob/main/interchaintest/conformance/cosmwasm.go
+func TestCosmWasmConformance(t *testing.T) {
+	if testing.Short() {
+		t.Skip()
+	}
 
-// ConformanceCosmWasm validates that store, instantiate, execute, and query work on a CosmWasm contract.
-func ConformanceCosmWasm(t *testing.T, ctx context.Context, chain *cosmos.CosmosChain, user ibc.Wallet) {
-	StdExecute(t, ctx, chain, user)
-	subMsg(t, ctx, chain, user)
+	t.Parallel()
+
+	// Base setup
+	chains := CreateThisBranchChain(t, 1, 0)
+	ic, ctx, _, _ := BuildInitialChain(t, chains)
+
+	chain := chains[0].(*cosmos.CosmosChain)
+
+	const userFunds = int64(10_000_000_000)
+	users := interchaintest.GetAndFundTestUsers(t, ctx, t.Name(), userFunds, chain)
+	chainUser := users[0]
+
+	StdExecute(t, ctx, chain, chainUser)
+	subMsg(t, ctx, chain, chainUser)
+
+	require.NotNil(t, ic)
+	require.NotNil(t, ctx)
+
+	t.Cleanup(func() {
+		_ = ic.Close()
+	})
 }
 
 func StdExecute(t *testing.T, ctx context.Context, chain *cosmos.CosmosChain, user ibc.Wallet) (contractAddr string) {

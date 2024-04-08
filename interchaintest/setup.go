@@ -32,8 +32,7 @@ var (
 		UidGid:     "1025:1025",
 	}
 
-	// SDK v45 Genesis
-	defaultGenesisKV = []cosmos.GenesisKV{
+	sdk45GenesisKV = []cosmos.GenesisKV{
 		{
 			Key:   "app_state.gov.voting_params.voting_period",
 			Value: VotingPeriod,
@@ -48,6 +47,25 @@ var (
 		},
 		{
 			Key:   "app_state.gov.deposit_params.min_deposit.0.amount",
+			Value: "1",
+		},
+	}
+
+	sdk47GenesisKV = []cosmos.GenesisKV{
+		{
+			Key:   "app_state.gov.params.voting_period",
+			Value: VotingPeriod,
+		},
+		{
+			Key:   "app_state.gov.params.max_deposit_period",
+			Value: MaxDepositPeriod,
+		},
+		{
+			Key:   "app_state.gov.params.min_deposit.0.denom",
+			Value: Denom,
+		},
+		{
+			Key:   "app_state.gov.params.min_deposit.0.amount",
 			Value: "1",
 		},
 	}
@@ -67,7 +85,7 @@ var (
 		NoHostMount:         false,
 		ConfigFileOverrides: nil,
 		EncodingConfig:      neutaroEncoding(),
-		ModifyGenesis:       cosmos.ModifyGenesis(defaultGenesisKV),
+		ModifyGenesis:       cosmos.ModifyGenesis(sdk47GenesisKV),
 	}
 
 	genesisWalletAmount = int64(10_000_000)
@@ -99,8 +117,8 @@ func CreateThisBranchChain(t *testing.T, numVals, numFull int) []ibc.Chain {
 func CreateChainWithCustomConfig(t *testing.T, numVals, numFull int, config ibc.ChainConfig) []ibc.Chain {
 	cf := interchaintest.NewBuiltinChainFactory(zaptest.NewLogger(t), []*interchaintest.ChainSpec{
 		{
-			Name:          "neutaro",
-			ChainName:     "neutaro",
+			Name:          config.Name,
+			ChainName:     config.Name,
 			Version:       config.Images[0].Version,
 			ChainConfig:   config,
 			NumValidators: &numVals,
@@ -111,6 +129,7 @@ func CreateChainWithCustomConfig(t *testing.T, numVals, numFull int, config ibc.
 	// Get chains from the chain factory
 	chains, err := cf.Chains(t.Name())
 	require.NoError(t, err)
+	require.Equal(t, 1, len(chains))
 
 	// chain := chains[0].(*cosmos.CosmosChain)
 	return chains
