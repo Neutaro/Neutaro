@@ -24,8 +24,7 @@ sudo apt update && sudo apt upgrade -y && sudo apt install curl tar wget clang p
 
 ### Installing Go v1.20.4
 ```shell
-ver="1.20.4"
-
+ver="1.22.2"
 cd $HOME
 wget "https://golang.org/dl/go$ver.linux-amd64.tar.gz"
 sudo rm -rf /usr/local/go
@@ -34,8 +33,8 @@ rm "go$ver.linux-amd64.tar.gz"
 echo "export PATH=$PATH:/usr/local/go/bin:$HOME/go/bin" >> $HOME/.bash_profile
 source $HOME/.bash_profile
 ```
-<br>
-Make sure version 1.20.4 is installed <br>
+
+Make sure version 1.22.2 is installed (if not, the make command will stop you):
 
 ```shell
 go version
@@ -45,17 +44,16 @@ go version
 ```shell
 cd $HOME
 git clone https://github.com/Neutaro/Neutaro
-cd Neutaro/cmd/Neutaro/
-go build
+make build
 ```
 
 ### Installing cosmovisor
 ```shell
 mkdir -p $HOME/.Neutaro/cosmovisor/genesis/bin
-mv $HOME/Neutaro/cmd/Neutaro/Neutaro $HOME/.Neutaro/cosmovisor/genesis/bin/
+mv $HOME/Neutaro/build/Neutaro $HOME/.Neutaro/cosmovisor/genesis/bin/
 sudo ln -s $HOME/.Neutaro/cosmovisor/genesis $HOME/.Neutaro/cosmovisor/current
 sudo ln -s $HOME/.Neutaro/cosmovisor/current/bin/Neutaro /usr/local/bin/Neutaro
-cd  $HOME/Neutaro/
+cd $HOME/Neutaro/
 go install cosmossdk.io/tools/cosmovisor/cmd/cosmovisor@v1.4.0
 ```
 
