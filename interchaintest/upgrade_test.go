@@ -3,6 +3,10 @@ package interchaintest
 import (
 	"context"
 	"fmt"
+	"github.com/cosmos/cosmos-sdk/crypto/keyring"
+	interchaintestrelayer "github.com/strangelove-ventures/interchaintest/v7/relayer"
+	"github.com/strangelove-ventures/interchaintest/v7/testreporter"
+	"go.uber.org/zap/zaptest"
 	"testing"
 	"time"
 
@@ -69,33 +73,117 @@ func CosmosChainUpgradeTest(t *testing.T, chainName, upgradeBranchVersion, upgra
 	cfg.Images = []ibc.DockerImage{baseChain}
 
 	numVals, numNodes := 4, 0
-	chains := CreateChainWithCustomConfig(t, numVals, numNodes, cfg)
-	chain := chains[0].(*cosmos.CosmosChain)
+	gaiaVals, gaiaNodes := 1, 0
 
-	ic, ctx, client, _ := BuildInitialChain(t, chains)
+	cf := interchaintest.NewBuiltinChainFactory(zaptest.NewLogger(t), []*interchaintest.ChainSpec{
+		{
+			Name:          "Neutaro",
+			ChainConfig:   cfg,
+			NumValidators: &numVals,
+			NumFullNodes:  &numNodes,
+	},
+		{
+			Name:          "gaia",
+			Version:       "v9.1.0",
+			NumValidators: &gaiaVals,
+			NumFullNodes:  &gaiaNodes,
+		},
+	})
+
+	const (
+		path = "ibc-path"
+	)
+	// Get chains from the chain factory
+	chains, err := cf.Chains(t.Name())
+	require.NoError(t, err)
+
+	client, network := interchaintest.DockerSetup(t)
+
+	neutaro, gaia := chains[0].(*cosmos.CosmosChain), chains[1].(*cosmos.CosmosChain)
+
+	relayerType, relayerName := ibc.CosmosRly, "relay"
+
+	// Get a relayer instance
+	rf := interchaintest.NewBuiltinRelayerFactory(
+		relayerType,
+		zaptest.NewLogger(t),
+		interchaintestrelayer.CustomDockerImage(IBCRelayerImage, IBCRelayerVersion, "100:1000"),
+		interchaintestrelayer.StartupFlags("--processor", "events", "--block-history", "100"),
+	)
+
+	r := rf.Build(t, client, network)
+
+	ic := interchaintest.NewInterchain().
+		AddChain(neutaro).
+		AddChain(gaia).
+		AddRelayer(r, relayerName).
+		AddLink(interchaintest.InterchainLink{
+			Chain1:  neutaro,
+			Chain2:  gaia,
+			Relayer: r,
+			Path:    path,
+		})
+
+	ctx := context.Background()
+
+	rep := testreporter.NewNopReporter()
+	eRep := rep.RelayerExecReporter(t)
+
+	require.NoError(t, ic.Build(ctx, eRep, interchaintest.InterchainBuildOptions{
+		TestName:          t.Name(),
+		Client:            client,
+		NetworkID:         network,
+		BlockDatabaseFile: interchaintest.DefaultBlockDatabaseFilepath(),
+		SkipPathCreation:  false,
+	}))
 	t.Cleanup(func() {
 		_ = ic.Close()
 	})
 
 	const userFunds = int64(10_000_000_000)
-	users := interchaintest.GetAndFundTestUsers(t, ctx, t.Name(), userFunds, chain)
-	chainUser := users[0]
+	users := interchaintest.GetAndFundTestUsers(t, ctx, t.Name(), userFunds, neutaro, gaia)
+	neutaroUser, gaiaUser := users[0], users[1]
+
+	err = r.StartRelayer(ctx, eRep, path)
+	require.NoError(t, err)
+
+	t.Cleanup(
+		func() {
+			err := r.StopRelayer(ctx, eRep)
+			if err != nil {
+				t.Logf("an error occurred while stopping the relayer: %s", err)
+			}
+		},
+	)
+
+	// Wait a few blocks for relayer to start and for user accounts to be created
+	err = testutil.WaitForBlocks(ctx, 5, neutaro, gaia)
+	require.NoError(t, err)
+
+	IBCTransferWorksTest(t, ctx, neutaro, gaia, neutaroUser, gaiaUser, r, eRep, path)
 
 	// upgrade
-	height, err := chain.Height(ctx)
+	height, err := neutaro.Height(ctx)
 	require.NoError(t, err, "error fetching height before submit upgrade proposal")
 
 	haltHeight := height + haltHeightDelta
-	proposalID := SubmitUpgradeProposal(t, ctx, chain, chainUser, upgradeName, haltHeight)
+	proposalID := SubmitUpgradeProposal(t, ctx, neutaro, neutaroUser, upgradeName, haltHeight)
 
-	ValidatorVoting(t, ctx, chain, proposalID, height, haltHeight)
+	ValidatorVoting(t, ctx, neutaro, proposalID, height, haltHeight)
 
-	UpgradeNodes(t, ctx, chain, client, haltHeight, upgradeRepo, upgradeBranchVersion)
+	UpgradeNodes(t, ctx, neutaro, client, haltHeight, upgradeRepo, upgradeBranchVersion)
+
+	// Necessary for v2 upgrade due to change in keystore. It happens automatically, but it makes the JSON output messed up for other commands later
+	for _, v := range neutaro.Nodes() {
+		_, stderr, err := v.ExecBin(ctx, "keys", "migrate", 	"--keyring-backend", keyring.BackendTest)
+		require.NoError(t, err, string(stderr))
+	}
 
 	// Post Upgrade: Conformance Validation
-	StdExecute(t, ctx, chain, chainUser)
-	subMsg(t, ctx, chain, chainUser)
-	// TODO: ibc conformance test
+	StdExecute(t, ctx, neutaro, neutaroUser)
+	subMsg(t, ctx, neutaro, neutaroUser)
+
+	IBCTransferWorksTest(t, ctx, neutaro, gaia, neutaroUser, gaiaUser, r, eRep, path)
 }
 
 func UpgradeNodes(t *testing.T, ctx context.Context, chain *cosmos.CosmosChain, client *client.Client, haltHeight uint64, upgradeRepo, upgradeBranchVersion string) {

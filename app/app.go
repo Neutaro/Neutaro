@@ -604,8 +604,8 @@ func New(
 		crisistypes.ModuleName,
 	)
 	app.ModuleManager.RegisterInvariants(app.CrisisKeeper)
-	configurator := module.NewConfigurator(app.appCodec, app.MsgServiceRouter(), app.GRPCQueryRouter())
-	app.ModuleManager.RegisterServices(configurator)
+	app.configurator = module.NewConfigurator(app.appCodec, app.MsgServiceRouter(), app.GRPCQueryRouter())
+	app.ModuleManager.RegisterServices(app.configurator)
 
 	// RegisterUpgradeHandlers is used for registering any on-chain upgrades.
 	// Make sure it's called after `app.ModuleManager` and `app.configurator` are set.
@@ -834,10 +834,7 @@ func (app *NeutaroApp) setupUpgradeStoreLoaders() {
 		return
 	}
 
-	var storeUpgrades *storetypes.StoreUpgrades
-
-	// Whenever we need to add/remove/rename modules, remove this comment and use the following as example:
-	// https://github.com/Stride-Labs/stride/blob/a8eb76937569cb285bb6e870af30afbddfcf1def/app/upgrades.go#L175
+	storeUpgrades := v2.StoreUpgrades
 
 	if storeUpgrades != nil {
 		app.SetStoreLoader(upgradetypes.UpgradeStoreLoader(upgradeInfo.Height, storeUpgrades))
@@ -854,6 +851,8 @@ func (app *NeutaroApp) setupUpgradeHandlers() {
 			*app.ModuleManager,
 			app.configurator,
 			app.IBCKeeper.ClientKeeper,
+			app.ParamsKeeper,
+			app.ConsensusParamsKeeper,
 		),
 	)
 }
