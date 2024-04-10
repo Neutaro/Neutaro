@@ -148,6 +148,9 @@ test-unit:
 test-with-coverage:
 	@go test -timeout 10m -v -coverpkg=./... -coverprofile=coverage.out -covermode=atomic ./...
 
+interchaintest:
+	@cd interchaintest && go test -timeout 20m -v ./...
+
 ###############################################################################
 ###                               Simulations                               ###
 ###############################################################################

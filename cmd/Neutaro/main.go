@@ -2,13 +2,14 @@ package main
 
 import (
 	"errors"
-	"github.com/Neutaro/Neutaro-Chain/app/params"
-	"github.com/Neutaro/Neutaro-Chain/cmd/Neutaro/cmd"
-	"github.com/cosmos/cosmos-sdk/server"
 	"os"
 
-	"github.com/Neutaro/Neutaro-Chain/app"
+	"github.com/cosmos/cosmos-sdk/server"
 	svrcmd "github.com/cosmos/cosmos-sdk/server/cmd"
+
+	"github.com/Neutaro/Neutaro-Chain/app"
+	"github.com/Neutaro/Neutaro-Chain/app/params"
+	"github.com/Neutaro/Neutaro-Chain/cmd/Neutaro/cmd"
 )
 
 func main() {

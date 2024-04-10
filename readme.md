@@ -155,3 +155,51 @@ once you have a funded wallet on the node send this, **__but make sure to check 
 ```shell
 Neutaro tx staking create-validator --amount=1000000uneutaro --pubkey=$(Neutaro tendermint show-validator) --moniker=$MONIKER --chain-id=Neutaro-1 --from WALLET --keyring-backend os --commission-rate="0.10" --commission-max-rate="0.20" --commission-max-change-rate="0.01" --min-self-delegation="1000000" --gas="auto" --gas-prices="0.0025uneutaro" --gas-adjustment="1.5"
 ```
+
+# Development
+
+To get started you mostly need go installed (see the part about install go in the validator guide if you are unsure)
+
+Other than that you will use make commands for most of the work you need to do.
+
+## Build
+
+```shell
+$ make build
+```
+
+## Serve locally
+There is a simple script that spins up Neutaro locally, so you can test and interact with it directly.
+See `scripts/serve_env.sh` for details on wallets that are set up during the serve command.
+
+To serve:
+```shell
+$ make serve
+```
+
+To kill it, you can run:
+```shell
+$ make kill-all
+```
+
+## Test
+
+There are not many (any?) tests in the regular code because currently there are no custom modules.
+If you add any, the following command will run them:
+
+```shell
+$ make test
+```
+
+Instead there are e2e tests under the interchaintest which you can read more about there, but also run all of them (they are slow):
+```shell
+$ make interchaintest
+```
+
+## Linting and formatting
+Before committing new code, make sure to run the linters and formatters first:
+
+```shell
+$ make lint
+$ make format
+```
