@@ -22,7 +22,7 @@ Make sure your system is up to date. <br>
 sudo apt update && sudo apt upgrade -y && sudo apt install curl tar wget clang pkg-config libssl-dev jq build-essential bsdmainutils git make ncdu gcc git jq chrony liblz4-tool -y
 ```
 
-### Installing Go v1.20.4
+### Installing Go v1.22.2
 ```shell
 ver="1.22.2"
 cd $HOME
@@ -44,6 +44,7 @@ go version
 ```shell
 cd $HOME
 git clone https://github.com/Neutaro/Neutaro
+cd Neutaro
 make build
 ```
 
@@ -174,6 +175,11 @@ If you are not able to be present you can prepare the new binary for Cosmovisor 
 3. Create an upgrade folder for Cosmovisor: `mkdir -p $HOME/.Neutaro/cosmovisor/upgrade/UPGRADE_NAME/bin` (the upgrade name _must_ match the upgrade name set in the governance proposal, most likely something like `v2`)
 4. Copy the new binary into the new folder: `cp build/Neutaro $HOME/.Neutaro/cosmovisor/upgrade/UPGRADE_NAME/bin`
 5. Make sure the binary is correct by running `$HOME/.Neutaro/cosmovisor/upgrade/UPGRADE_NAME/bin/Neutaro version` (it should output the )
+
+#### If you are not running Cosmovisor
+
+The process for upgrading without Cosmovisor is very simple, you just need to wait for the halt height to happen and then stop 
+the node, switch out the old binary with the new one and restart the service.
 
 # Development
 
