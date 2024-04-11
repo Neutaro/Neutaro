@@ -15,6 +15,13 @@ import (
 	"github.com/cosmos/cosmos-sdk/crypto/keyring"
 )
 
+type CW721TokensResp struct {
+	Data struct{
+		Tokens []string `json:"tokens"`
+	} `json:"data"`
+
+}
+
 // Pretty much a direct copy from Juno: https://github.com/CosmosContracts/juno/blob/main/interchaintest/helpers/cosmwasm.go
 
 func SmartQueryString(t *testing.T, ctx context.Context, chain *cosmos.CosmosChain, contractAddr, queryMsg string, res interface{}) error {

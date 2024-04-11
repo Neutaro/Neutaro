@@ -3,6 +3,7 @@ package interchaintest
 import (
 	"context"
 	"fmt"
+	"github.com/Neutaro/Neutaro/interchaintest/helpers"
 	"github.com/cosmos/cosmos-sdk/crypto/keyring"
 	interchaintestrelayer "github.com/strangelove-ventures/interchaintest/v7/relayer"
 	"github.com/strangelove-ventures/interchaintest/v7/testreporter"
@@ -162,6 +163,15 @@ func CosmosChainUpgradeTest(t *testing.T, chainName, upgradeBranchVersion, upgra
 
 	IBCTransferWorksTest(t, ctx, neutaro, gaia, neutaroUser, gaiaUser, r, eRep, path)
 
+	// Upload the old cw721 contract that was on Neutaro mainnet and test that it works
+	_, contractAddr := helpers.SetupContract(t, ctx, neutaro, neutaroUser.KeyName(), "contracts/old_cw721_base.wasm.gz", fmt.Sprintf(`{"name":"test_nft_collection", "symbol": "wtf", "minter": "%s"}`, neutaroUser.FormattedAddress()))
+	helpers.ExecuteMsgWithFee(t, ctx, neutaro, neutaroUser, contractAddr, "", "10000"+neutaro.Config().Denom, fmt.Sprintf(`{"mint":{"token_id":"00001", "owner":"%s"}}`, neutaroUser.FormattedAddress()))
+	var tokensBeforeRes helpers.CW721TokensResp
+	err = helpers.SmartQueryString(t, ctx, neutaro, contractAddr, fmt.Sprintf(`{"tokens": {"owner": "%s"}}`, neutaroUser.FormattedAddress()), &tokensBeforeRes)
+	require.NoError(t, err, "error querying old cw721 contract before upgrade")
+	require.Len(t, tokensBeforeRes.Data.Tokens, 1)
+	require.Equal(t, "00001", tokensBeforeRes.Data.Tokens[0])
+
 	// upgrade
 	height, err := neutaro.Height(ctx)
 	require.NoError(t, err, "error fetching height before submit upgrade proposal")
@@ -180,6 +190,15 @@ func CosmosChainUpgradeTest(t *testing.T, chainName, upgradeBranchVersion, upgra
 	}
 
 	// Post Upgrade: Conformance Validation
+	// First, lets check that the existing contract still works:
+	helpers.ExecuteMsgWithFee(t, ctx, neutaro, neutaroUser, contractAddr, "", "10000"+neutaro.Config().Denom, fmt.Sprintf(`{"mint":{"token_id":"00002", "owner":"%s"}}`, neutaroUser.FormattedAddress()))
+	var tokensAfterRes helpers.CW721TokensResp
+	err = helpers.SmartQueryString(t, ctx, neutaro, contractAddr, fmt.Sprintf(`{"tokens": {"owner": "%s"}}`, neutaroUser.FormattedAddress()), &tokensAfterRes)
+	require.NoError(t, err, "error querying old cw721 contract after upgrade")
+	require.Len(t, tokensAfterRes.Data.Tokens, 2)
+	require.Equal(t, "00001", tokensAfterRes.Data.Tokens[0])
+	require.Equal(t, "00002", tokensAfterRes.Data.Tokens[1])
+
 	StdExecute(t, ctx, neutaro, neutaroUser)
 	subMsg(t, ctx, neutaro, neutaroUser)
 
