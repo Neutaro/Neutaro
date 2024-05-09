@@ -22,10 +22,9 @@ Make sure your system is up to date. <br>
 sudo apt update && sudo apt upgrade -y && sudo apt install curl tar wget clang pkg-config libssl-dev jq build-essential bsdmainutils git make ncdu gcc git jq chrony liblz4-tool -y
 ```
 
-### Installing Go v1.20.4
+### Installing Go v1.22.2
 ```shell
-ver="1.20.4"
-
+ver="1.22.2"
 cd $HOME
 wget "https://golang.org/dl/go$ver.linux-amd64.tar.gz"
 sudo rm -rf /usr/local/go
@@ -34,8 +33,8 @@ rm "go$ver.linux-amd64.tar.gz"
 echo "export PATH=$PATH:/usr/local/go/bin:$HOME/go/bin" >> $HOME/.bash_profile
 source $HOME/.bash_profile
 ```
-<br>
-Make sure version 1.20.4 is installed <br>
+
+Make sure version 1.22.2 is installed (if not, the make command will stop you):
 
 ```shell
 go version
@@ -45,17 +44,17 @@ go version
 ```shell
 cd $HOME
 git clone https://github.com/Neutaro/Neutaro
-cd Neutaro/cmd/Neutaro/
-go build
+cd Neutaro
+make build
 ```
 
 ### Installing cosmovisor
 ```shell
 mkdir -p $HOME/.Neutaro/cosmovisor/genesis/bin
-mv $HOME/Neutaro/cmd/Neutaro/Neutaro $HOME/.Neutaro/cosmovisor/genesis/bin/
+mv $HOME/Neutaro/build/Neutaro $HOME/.Neutaro/cosmovisor/genesis/bin/
 sudo ln -s $HOME/.Neutaro/cosmovisor/genesis $HOME/.Neutaro/cosmovisor/current
 sudo ln -s $HOME/.Neutaro/cosmovisor/current/bin/Neutaro /usr/local/bin/Neutaro
-cd  $HOME/Neutaro/
+cd $HOME/Neutaro/
 go install cosmossdk.io/tools/cosmovisor/cmd/cosmovisor@v1.4.0
 ```
 
@@ -156,4 +155,76 @@ once you have a funded wallet on the node send this, **__but make sure to check 
 <br>
 ```shell
 Neutaro tx staking create-validator --amount=1000000uneutaro --pubkey=$(Neutaro tendermint show-validator) --moniker=$MONIKER --chain-id=Neutaro-1 --from WALLET --keyring-backend os --commission-rate="0.10" --commission-max-rate="0.20" --commission-max-change-rate="0.01" --min-self-delegation="1000000" --gas="auto" --gas-prices="0.0025uneutaro" --gas-adjustment="1.5"
+```
+
+### Preparing for an upgrade
+
+When there is a planned upgrade that has passed through governance there will be a certain height where the upgrade is supposed to happen.
+
+To find out approximately when the height will be reached, change the end of the URL here with the actual block height from the proposal: https://nms1.neutaro.tech/Neutaro/block/100000000
+(make sure to check this when the time is approaching as the block time is not constant and the time might shift quite a bit).
+
+At that height, the blockchain will automatically stop and requires a new binary with the correct upgrade programmed in.
+
+It is always advised to be present during an upgrade as it sometimes fails and needs coordinated efforts to get back up again.
+
+If you are not able to be present you can prepare the new binary for Cosmovisor so that it automatically switches out the new binary when the time comes.
+
+1. Make sure you have the correct version of Neutaro repo: `git checkout LATEST_TAG` (the exact tag to check out will be given to you as part of the upgrade information, most likely it will be something like `git checkout v2.0.0`. See the latest tag in GitHub.)
+2. Build a new version of the binary: `make build`
+3. Create an upgrade folder for Cosmovisor: `mkdir -p $HOME/.Neutaro/cosmovisor/upgrade/UPGRADE_NAME/bin` (the upgrade name _must_ match the upgrade name set in the governance proposal, most likely something like `v2`)
+4. Copy the new binary into the new folder: `cp build/Neutaro $HOME/.Neutaro/cosmovisor/upgrade/UPGRADE_NAME/bin`
+5. Make sure the binary is correct by running `$HOME/.Neutaro/cosmovisor/upgrade/UPGRADE_NAME/bin/Neutaro version` (it should output the )
+
+#### If you are not running Cosmovisor
+
+The process for upgrading without Cosmovisor is very simple, you just need to wait for the halt height to happen and then stop 
+the node, switch out the old binary with the new one and restart the service.
+
+# Development
+
+To get started you mostly need go installed (see the part about install go in the validator guide if you are unsure)
+
+Other than that you will use make commands for most of the work you need to do.
+
+### Build
+
+```shell
+$ make build
+```
+
+### Serve locally
+There is a simple script that spins up Neutaro locally, so you can test and interact with it directly.
+See `scripts/serve_env.sh` for details on wallets that are set up during the serve command.
+
+To serve:
+```shell
+$ make serve
+```
+
+To kill it, you can run:
+```shell
+$ make kill-all
+```
+
+## Test
+
+There are not many (any?) tests in the regular code because currently there are no custom modules.
+If you add any, the following command will run them:
+
+```shell
+$ make test
+```
+
+Instead there are e2e tests under the interchaintest which you can read more about there, but also run all of them (they are slow):
+```shell
+$ make interchaintest
+```
+
+## Linting and formatting
+Before committing new code, make sure to run the linters and formatters first:
+
+```shell
+$ make lint
+$ make format
 ```
