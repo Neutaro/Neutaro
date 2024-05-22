@@ -172,9 +172,9 @@ If you are not able to be present you can prepare the new binary for Cosmovisor 
 
 1. Make sure you have the correct version of Neutaro repo: `git checkout LATEST_TAG` (the exact tag to check out will be given to you as part of the upgrade information, most likely it will be something like `git checkout v2.0.0`. See the latest tag in GitHub.)
 2. Build a new version of the binary: `make build`
-3. Create an upgrade folder for Cosmovisor: `mkdir -p $HOME/.Neutaro/cosmovisor/upgrade/UPGRADE_NAME/bin` (the upgrade name _must_ match the upgrade name set in the governance proposal, most likely something like `v2`)
-4. Copy the new binary into the new folder: `cp build/Neutaro $HOME/.Neutaro/cosmovisor/upgrade/UPGRADE_NAME/bin`
-5. Make sure the binary is correct by running `$HOME/.Neutaro/cosmovisor/upgrade/UPGRADE_NAME/bin/Neutaro version` (it should output the )
+3. Create an upgrade folder for Cosmovisor: `mkdir -p $HOME/.Neutaro/cosmovisor/upgrade/v2/bin` (the upgrade name _must_ match the upgrade name set in the governance proposal)
+4. Copy the new binary into the new folder: `cp build/Neutaro $HOME/.Neutaro/cosmovisor/upgrade/v2/bin`
+5. Make sure the binary is correct by running `$HOME/.Neutaro/cosmovisor/upgrade/v2/bin/Neutaro version` (it should output the )
 
 #### If you are not running Cosmovisor
 
