@@ -161,7 +161,7 @@ Neutaro tx staking create-validator --amount=1000000uneutaro --pubkey=$(Neutaro 
 
 When there is a planned upgrade that has passed through governance there will be a certain height where the upgrade is supposed to happen.
 
-To find out approximately when the height will be reached, change the end of the URL here with the actual block height from the proposal: https://nms1.neutaro.tech/Neutaro/block/100000000
+To find out approximately when the height will be reached, change the end of the URL here with the actual block height from the proposal: https://nms1.neutaro.tech/Neutaro/block/4692000
 (make sure to check this when the time is approaching as the block time is not constant and the time might shift quite a bit).
 
 At that height, the blockchain will automatically stop and requires a new binary with the correct upgrade programmed in.
