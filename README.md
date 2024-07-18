@@ -87,8 +87,7 @@ cd $HOME
 mv $HOME/.Neutaro/data $HOME/.Neutaro/data-old
 mv $HOME/.Neutaro/wasm $HOME/.Neutaro/wasm-old
 wget https://poker.neutaro.tech/snapshot160724.tar.lz4
-lz4 -d snapshot160724.tar.lz4
-tar -xf snapshot160724.tar
+lz4 -d snapshot160724.tar.lz4 -c | tar xvf -
 ```
 Once the node is running you can delete unnecessary files using
 ```shell
