@@ -86,9 +86,9 @@ The file is in $HOME/.Neutaro/config/config.toml. Here you edit the "seeds" to s
 cd $HOME
 mv $HOME/.Neutaro/data $HOME/.Neutaro/data-old
 mv $HOME/.Neutaro/wasm $HOME/.Neutaro/wasm-old
-wget http://poker.neutaro.tech/snapshot070624.tar.lz4
-lz4 -d snapshot070624.tar.lz4
-tar -xf snapshot070624.tar
+wget https://poker.neutaro.tech/snapshot160724.tar.lz4
+lz4 -d snapshot160724.tar.lz4
+tar -xf snapshot160724.tar
 ```
 Once the node is running you can delete unnecessary files using
 ```shell
