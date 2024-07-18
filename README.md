@@ -91,7 +91,6 @@ lz4 -d snapshot160724.tar.lz4 -c | tar xvf -
 ```
 Once the node is running you can delete unnecessary files using
 ```shell
-rm -r snapshot160724.tar
 rm -r snapshot160724.tar.lz4
 rm -r data-old
 rm -r wasm-old
