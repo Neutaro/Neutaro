@@ -173,7 +173,9 @@ If you are not able to be present you can prepare the new binary for Cosmovisor 
 2. Build a new version of the binary: `make build`
 3. Create an upgrade folder for Cosmovisor: `mkdir -p $HOME/.Neutaro/cosmovisor/upgrades/v2/bin` (the upgrade name _must_ match the upgrade name set in the governance proposal)
 4. Copy the new binary into the new folder: `cp build/Neutaro $HOME/.Neutaro/cosmovisor/upgrades/v2/bin`
-5. Make sure the binary is correct by running `$HOME/.Neutaro/cosmovisor/upgrades/v2/bin/Neutaro version` (it should output the )
+5. Make sure the binary is correct by running `$HOME/.Neutaro/cosmovisor/upgrades/v2/bin/Neutaro version` (it should output the version (`2.0.0` in this case))
+
+Now you upgrade should happen automatically, but if you can it, is always advisable to be present at the upgrade time in case something changes.
 
 #### If you are not running Cosmovisor
 
