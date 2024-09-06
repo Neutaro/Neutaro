@@ -111,6 +111,19 @@ Download the genesis file:
 curl http://154.26.153.186/genesis.json > $HOME/.Neutaro/config/genesis.json
 ```
 ### Step 6: Edit Configuration Files for Node Optimization
+To optimize your node's performance, you'll need to edit configuration files using `vim`. If you're not familiar with `vim`, here’s a quick guide:
+
+- To **enter "Insert" mode** for editing, press `i`.
+- To **exit "Insert" mode**, press `ESC`.
+- To **save and exit** the file, type `:x` and press `Enter`.
+
+If you don't have `vim` installed, you can install it using the following command:
+
+```shell
+sudo apt install vim -y
+```
+
+
 Edit `app.toml`:
 <br>
 ```shell
