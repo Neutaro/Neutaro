@@ -123,7 +123,7 @@ sudo vim $HOME/.Neutaro/config/config.toml
 
 Update the seeds line: <br>
 ```shell
-seeds = "0e24a596dc34e7063ec2938baf05d09b374709e6@109.199.106.233:26656,84ae242b0c4c14af59a61438ba2eca4573b91c95@seed0.neutaro.tech:36656"
+seeds = "84ae242b0c4c14af59a61438ba2eca4573b91c95@seed0.neutaro.tech:36656"
 ```
 
 ### Step 7: Download and Apply the Latest Snapshot
