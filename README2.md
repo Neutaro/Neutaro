@@ -106,8 +106,9 @@ curl http://154.26.153.186/genesis.json > $HOME/.Neutaro/config/genesis.json
 ### Step 6: Edit Configuration Files for Node Optimization
 Edit app.toml:
 <br>
+```shell
 sudo vim $HOME/.Neutaro/config/app.toml
-<br>
+```
 <br>
 For pruning you could add whatever you like. These options mainly decide how much storage the Node will use. An example would be using<br>
 minimum-gas-prices = "0uneutaro" <br>
