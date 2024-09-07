@@ -1,13 +1,13 @@
 # Why You Should Care About Neutaro
 
-Neutaro is closely working with Timpi to help create the first truly decentralized search engine! On Neutaro, you can claim rewards for contributing to Timpi and vote on different proposals affecting Timpi, such as those regarding the ethical standpoint of the Timpi search engine.
+Neutaro is closely working with Timpi to help create the first truly decentralized search engine! On Neutaro, you can claim rewards for contributing to Timpi and vote on different proposals affecting Timpi, such as those regarding the ethical standpoint of the Timpi search engine.<br>
 
 ## Neutaro Validator Security Guide
 For more details on security, please check the [Security Guide](https://github.com/Neutaro/Neutaro/blob/main/Security%20Guide.md).
 
 
 ## Introduction
-
+Running a node means that you run the chains binary. Follow these steps to create a Validator that runs as a service on linux. <br>
 You can be a part of Neutaro by holding tokens and delegating them, running a node, or becoming a validator.
 
 ## Delegating Tokens
@@ -23,7 +23,25 @@ Neutaro tx staking delegate ValidatorAddress 1000000uneutaro --from YOURWALLET -
 ```
 
 # Running a node
-Running a node means that you run the chains binary. Follow these steps to create a Validator that runs as a service on linux.
+## **Prefer a Semi-Automated Installation?**
+
+If you'd like to skip the manual installation and opt for a semi-automated process, follow the steps below:
+
+### **Semi-Automated Installation**
+
+Run the following command in your terminal to perform a semi-automated installation:
+
+```shell
+bash <(wget -qO- https://raw.githubusercontent.com/Neutaro/Neutaro/main/neutaro_setup.sh)
+```
+
+#### **Automated Removal of the Installation**
+
+To automatically remove the Neutaro installation, use this command:
+
+```shell
+bash <(wget -qO- https://raw.githubusercontent.com/Neutaro/Neutaro/main/neutaro_remove.sh)
+```
 
 ### Step 1: Update System and Install Dependencies
 We suggest using **Ubuntu 22.04.03**, **4 cores, 8gb RAM** and **100gb of free storage**. The storage will increase overtime, but with the suggested pruning and current state of the chain it's fine and it will be fine for a few more months. <br>
