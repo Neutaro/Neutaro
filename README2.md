@@ -23,7 +23,7 @@ Neutaro tx staking delegate ValidatorAddress 1000000uneutaro --from YOURWALLET -
 ```
 
 # Running a node
-## **Prefer a Semi-Automated Installation?**
+### **Prefer a Semi-Automated Installation?**
 
 If you'd like to skip the manual installation and opt for a semi-automated process, follow the steps below:
 
