@@ -22,6 +22,28 @@ To delegate your tokens to a Validator, use the command below. **1,000,000 uneut
 Neutaro tx staking delegate ValidatorAddress 1000000uneutaro --from YOURWALLET --chain-id Neutaro-1
 ```
 
+# Before Running a Node
+
+### **Open Port 26656 for Better Connectivity**
+
+To improve network connectivity and allow your node to share seeds with others, you need to open port `26656` on both your Linux firewall and router.
+
+#### **1. Open Port 26656 on Linux Firewall (UFW):**
+
+Run the following commands to allow traffic on port `26656`:
+
+```shell
+sudo ufw allow 26656/tcp
+sudo ufw reload
+```
+
+#### **2. Open Port 26656 on Your Router:**
+
+Ensure port `26656` is open for **TCP** traffic in your router's Port Forwarding settings.
+
+Opening port `26656` helps with better network performance and faster synchronization.
+
+
 # Running a node
 ### **Prefer a Semi-Automated Installation?**
 
