@@ -3,7 +3,7 @@
 Neutaro is closely working with Timpi to help create the first truly decentralized search engine! On Neutaro, you can claim rewards for contributing to Timpi and vote on different proposals affecting Timpi, such as those regarding the ethical standpoint of the Timpi search engine.
 
 ## Neutaro Validator Security Guide
-For more details on Neutaro Validator security, please check the [Security Guide](https://github.com/Neutaro/Neutaro/blob/main/Security%20Guide.md).
+For more details on security, please check the [Security Guide](https://github.com/Neutaro/Neutaro/blob/main/Security%20Guide.md).
 
 
 ## Introduction
