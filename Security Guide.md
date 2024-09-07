@@ -184,7 +184,7 @@ Always prioritize the security and stability of your node and validate actions c
    - Set appropriate logging levels like `info` or `debug` to get the required details.
 
 
-### **5. Educate Validators on Security Best Practices**
+### **5. Upcoming- Educate Validators on Security Best Practices**
 
 #### **a. Create Easy-to-Understand Guides**
 - **What to Include:**
