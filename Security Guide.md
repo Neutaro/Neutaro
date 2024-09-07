@@ -1,4 +1,4 @@
-## **Neutaro Node Validator Security Guide**
+## **Neutaro Validator Security Guide**
 
 ### **Disclaimer: Proceed with Caution**
 
