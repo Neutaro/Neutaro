@@ -25,5 +25,3 @@ sudo rm -rf $HOME/.cache/go-build
 sudo rm -rf /var/log/Neutaro*
 
 echo "Neutaro setup has been completely removed from your system."
-
-"neutaro_remove.sh" 38L, 1047C                                                                                                  38,0-1        Bot
