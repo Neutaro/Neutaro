@@ -3,6 +3,7 @@
 # Colors for output
 RED='\033[0;31m'
 GREEN='\033[0;32m'
+YELLOW='\033[0;33m'
 NC='\033[0m' # No Color
 
 echo -e "${GREEN}Starting Neutaro Validator Auto-Setup Script${NC}"
@@ -15,29 +16,13 @@ DEFAULT_SEEDS="84ae242b0c4c14af59a61438ba2eca4573b91c95@seed0.neutaro.tech:36656
 read -p "Enter seeds (default: $DEFAULT_SEEDS): " SEEDS
 SEEDS=${SEEDS:-$DEFAULT_SEEDS} # Use default if input is empty
 
-echo "Pruning options (choose one):"
-echo "1) custom (recommended)"
-echo "2) default"
-echo "3) nothing"
-read -p "Enter pruning option (1-3): " PRUNING_CHOICE
+# Set pruning options to custom
+PRUNING="custom"
+PRUNING_KEEP_RECENT="100"
+PRUNING_INTERVAL="19"
 
-case $PRUNING_CHOICE in
-  1)
-    PRUNING="custom"
-    PRUNING_KEEP_RECENT="100"
-    PRUNING_INTERVAL="19"
-    ;;
-  2)
-    PRUNING="default"
-    ;;
-  3)
-    PRUNING="nothing"
-    ;;
-  *)
-    echo -e "${RED}Invalid choice, using default pruning settings.${NC}"
-    PRUNING="default"
-    ;;
-esac
+echo -e "${GREEN}Pruning is set to custom with the following settings:${NC}"
+echo -e "${GREEN}Keep recent: $PRUNING_KEEP_RECENT, Interval: $PRUNING_INTERVAL${NC}"
 
 # Inform about persistent peers
 echo -e "${GREEN}Important: If you face sync issues due to limited seeds, you may need to add more persistent peers.${NC}"
@@ -49,7 +34,11 @@ read -p "Enter persistent peers (optional, leave blank to skip): " PERSISTENT_PE
 # Update and install dependencies
 echo -e "${GREEN}Updating and installing dependencies...${NC}"
 sudo apt update && sudo apt upgrade -y
-sudo apt install curl tar wget clang pkg-config libssl-dev jq build-essential bsdmainutils git make ncdu gcc chrony liblz4-tool -y
+sudo apt install curl tar wget clang pkg-config libssl-dev jq build-essential bsdmainutils git make ncdu gcc chrony liblz4-tool pv -y
+if [ $? -ne 0 ]; then
+  echo -e "${RED}Failed to install dependencies. Exiting.${NC}"
+  exit 1
+fi
 
 # Install Go
 GO_VERSION="1.22.2"
@@ -61,27 +50,32 @@ sudo tar -C /usr/local -xzf "go$GO_VERSION.linux-amd64.tar.gz"
 rm "go$GO_VERSION.linux-amd64.tar.gz"
 echo "export PATH=$PATH:/usr/local/go/bin:$HOME/go/bin" >> $HOME/.bash_profile
 source $HOME/.bash_profile
-go version
+go version >/dev/null 2>&1
+
+if ! command -v go &> /dev/null || [[ "$(go version)" != *"$GO_VERSION"* ]]; then
+  echo -e "${RED}Go installation failed or incorrect version installed. Exiting.${NC}"
+  exit 1
+fi
 
 # Clone and build Neutaro
 echo -e "${GREEN}Cloning and building Neutaro...${NC}"
 cd $HOME
-git clone https://github.com/Neutaro/Neutaro
+git clone https://github.com/Neutaro/Neutaro || { echo -e "${RED}Failed to clone Neutaro repository. Exiting.${NC}"; exit 1; }
 cd Neutaro
-make build
+make build || { echo -e "${RED}Failed to build Neutaro. Exiting.${NC}"; exit 1; }
 
 # Install Cosmovisor
 echo -e "${GREEN}Setting up Cosmovisor...${NC}"
 mkdir -p $HOME/.Neutaro/cosmovisor/genesis/bin
 mv $HOME/Neutaro/build/Neutaro $HOME/.Neutaro/cosmovisor/genesis/bin/
-sudo ln -s $HOME/.Neutaro/cosmovisor/genesis $HOME/.Neutaro/cosmovisor/current
-sudo ln -s $HOME/.Neutaro/cosmovisor/current/bin/Neutaro /usr/local/bin/Neutaro
+sudo ln -sfn $HOME/.Neutaro/cosmovisor/genesis $HOME/.Neutaro/cosmovisor/current
+sudo ln -sfn $HOME/.Neutaro/cosmovisor/current/bin/Neutaro /usr/local/bin/Neutaro
 cd $HOME/Neutaro/
-go install cosmossdk.io/tools/cosmovisor/cmd/cosmovisor@v1.4.0
+go install cosmossdk.io/tools/cosmovisor/cmd/cosmovisor@v1.4.0 || { echo -e "${RED}Failed to install Cosmovisor. Exiting.${NC}"; exit 1; }
 
 # Initialize and configure the node
 echo -e "${GREEN}Configuring your Neutaro node...${NC}"
-Neutaro init $MONIKER --chain-id Neutaro-1
+Neutaro init $MONIKER --chain-id Neutaro-1 || { echo -e "${RED}Failed to initialize the node. Exiting.${NC}"; exit 1; }
 Neutaro config chain-id Neutaro-1
 Neutaro config keyring-backend os
 curl http://154.26.153.186/genesis.json > $HOME/.Neutaro/config/genesis.json
@@ -90,10 +84,8 @@ curl http://154.26.153.186/genesis.json > $HOME/.Neutaro/config/genesis.json
 echo -e "${GREEN}Setting gas prices and pruning options...${NC}"
 sed -i "s/^minimum-gas-prices *=.*/minimum-gas-prices = \"0uneutaro\"/" $HOME/.Neutaro/config/app.toml
 sed -i "s/^pruning *=.*/pruning = \"$PRUNING\"/" $HOME/.Neutaro/config/app.toml
-if [ "$PRUNING" == "custom" ]; then
-  sed -i "s/^pruning-keep-recent *=.*/pruning-keep-recent = \"$PRUNING_KEEP_RECENT\"/" $HOME/.Neutaro/config/app.toml
-  sed -i "s/^pruning-interval *=.*/pruning-interval = \"$PRUNING_INTERVAL\"/" $HOME/.Neutaro/config/app.toml
-fi
+sed -i "s/^pruning-keep-recent *=.*/pruning-keep-recent = \"$PRUNING_KEEP_RECENT\"/" $HOME/.Neutaro/config/app.toml
+sed -i "s/^pruning-interval *=.*/pruning-interval = \"$PRUNING_INTERVAL\"/" $HOME/.Neutaro/config/app.toml
 
 # Configure config.toml
 sed -i "s/^seeds *=.*/seeds = \"$SEEDS\"/" $HOME/.Neutaro/config/config.toml
@@ -104,14 +96,21 @@ fi
 # Open port 26656 (recommended)
 sudo ufw allow 26656/tcp
 
-# Download and apply the new snapshot
+# Download and apply the new snapshot with progress
 echo -e "${GREEN}Downloading and applying the blockchain snapshot...${NC}"
 cd $HOME
 mv $HOME/.Neutaro/data $HOME/.Neutaro/data-old || echo "data-old directory does not exist"
 mv $HOME/.Neutaro/wasm $HOME/.Neutaro/wasm-old || echo "wasm-old directory does not exist"
 wget https://poker.neutaro.tech/snapshot010924.tar.lz4
-lz4 -d snapshot010924.tar.lz4 -c | tar xvf -
+
+# Unpacking the snapshot with progress
+echo -e "${GREEN}Unpacking the snapshot...${NC}"
+pv snapshot010924.tar.lz4 | lz4 -d - | tar xvf - -C $HOME/.Neutaro --strip-components=1 > /dev/null 2>&1
+
+# Clean up the downloaded snapshot file
 rm -r snapshot010924.tar.lz4
+
+echo -e "${GREEN}Snapshot unpacking complete.${NC}"
 
 # Create systemd service for Neutaro
 echo -e "${GREEN}Creating systemd service for Neutaro...${NC}"
@@ -138,7 +137,7 @@ EOF
 echo -e "${GREEN}Starting Neutaro service...${NC}"
 sudo systemctl daemon-reload
 sudo systemctl enable Neutaro
-sudo systemctl restart Neutaro
+sudo systemctl restart Neutaro || { echo -e "${RED}Failed to start Neutaro service. Exiting.${NC}"; exit 1; }
 
 # Fix potential issues with missing binaries
 mkdir -p $HOME/.Neutaro/cosmovisor/upgrades/v2/bin
@@ -153,10 +152,13 @@ echo -e "${GREEN}To monitor the logs, use:${NC}"
 echo "sudo journalctl -fu Neutaro -o cat"
 
 # Additional Instructions for After the Node is Synced
+
 echo -e "${GREEN}Once the node is synced, follow the steps below to configure your validator and begin participating in the network:${NC}"
-echo "1. If needed, recover your wallet using:"
+
+echo -e "\n1. If needed, recover your wallet using:\n"
 echo "   Neutaro keys add WALLET --keyring-backend os --recover"
-echo "2. Once your wallet is funded, create your validator with:"
+
+echo -e "\n2. Once your wallet is funded, create your validator with:\n"
 echo "   Neutaro tx staking create-validator --amount=1000000uneutaro --pubkey=\$(Neutaro tendermint show-validator) --moniker=$MONIKER --chain-id=Neutaro-1 --from WALLET --keyring-backend os --commission-rate=\"0.10\" --details=\"About_Your_Validator\" --commission-max-rate=\"0.20\" --commission-max-change-rate=\"0.01\" --min-self-delegation=\"1000000\" --gas=\"auto\" --gas-prices=\"0.0025uneutaro\" --gas-adjustment=\"1.5\""
 
 # End of script
