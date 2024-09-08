@@ -26,7 +26,7 @@ echo -e "${GREEN}Keep recent: $PRUNING_KEEP_RECENT, Interval: $PRUNING_INTERVAL$
 
 # Inform about persistent peers
 echo -e "${GREEN}Important: If you face sync issues due to limited seeds, you may need to add more persistent peers.${NC}"
-echo -e "${GREEN}Also, opening port 26656 for TCP connections is recommended to share your node with others and improve the network.${NC}"
+echo -e "${GREEN}Also, opening port 26656 for TCP connections is recommended to share your node with others and improve the network. Make sure to open this port on your router as well.${NC}"
 
 # Prompt for persistent peers (optional)
 read -p "Enter persistent peers (optional, leave blank to skip): " PERSISTENT_PEERS
@@ -101,14 +101,14 @@ echo -e "${GREEN}Downloading and applying the blockchain snapshot...${NC}"
 cd $HOME
 mv $HOME/.Neutaro/data $HOME/.Neutaro/data-old || echo "data-old directory does not exist"
 mv $HOME/.Neutaro/wasm $HOME/.Neutaro/wasm-old || echo "wasm-old directory does not exist"
-wget https://poker.neutaro.tech/snapshot010924.tar.lz4
+wget https://poker.neutaro.tech/latest.tar.lz4
 
 # Unpacking the snapshot with progress
 echo -e "${GREEN}Unpacking the snapshot...${NC}"
-pv snapshot010924.tar.lz4 | lz4 -d - | tar xvf - -C $HOME/.Neutaro --strip-components=1 > /dev/null 2>&1
+pv latest.tar.lz4 | lz4 -d - | tar xvf - -C $HOME/.Neutaro --strip-components=1 > /dev/null 2>&1
 
 # Clean up the downloaded snapshot file
-rm -r snapshot010924.tar.lz4
+rm -r latest.tar.lz4
 
 echo -e "${GREEN}Snapshot unpacking complete.${NC}"
 
