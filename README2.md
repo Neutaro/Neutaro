@@ -113,7 +113,7 @@ Set up cosmovisor directories and move the Neutaro binary:
 mkdir -p $HOME/.Neutaro/cosmovisor/genesis/bin
 cp $HOME/Neutaro/build/Neutaro $HOME/.Neutaro/cosmovisor/genesis/bin/
 ln -sfn $HOME/.Neutaro/cosmovisor/genesis $HOME/.Neutaro/cosmovisor/current
-ln -sfn $HOME/.Neutaro/cosmovisor/current/bin/Neutaro /usr/local/bin/Neutaro
+sudo ln -sfn $HOME/.Neutaro/cosmovisor/current/bin/Neutaro /usr/local/bin/Neutaro
 ```
 
 Set up cosmovisor directories and move the Neutaro binary:
