@@ -12,7 +12,7 @@ echo -e "${GREEN}Starting Neutaro Validator Auto-Setup Script${NC}"
 read -p "Enter your moniker name: " MONIKER
 
 # Set default seeds and pruning options
-DEFAULT_SEEDS="84ae242b0c4c14af59a61438ba2eca4573b91c95@seed0.neutaro.tech:36656"
+DEFAULT_SEEDS="0e24a596dc34e7063ec2938baf05d09b374709e6@109.199.106.233:26656,84ae242b0c4c14af59a61438ba2eca4573b91c95@seed0.neutaro.tech:36656"
 read -p "Enter seeds (default: $DEFAULT_SEEDS): " SEEDS
 SEEDS=${SEEDS:-$DEFAULT_SEEDS} # Use default if input is empty
 
@@ -160,5 +160,60 @@ echo "   Neutaro keys add WALLET --keyring-backend os --recover"
 
 echo -e "\n2. Once your wallet is funded, create your validator with:\n"
 echo "   Neutaro tx staking create-validator --amount=1000000uneutaro --pubkey=\$(Neutaro tendermint show-validator) --moniker=$MONIKER --chain-id=Neutaro-1 --from WALLET --keyring-backend os --commission-rate=\"0.10\" --details=\"About_Your_Validator\" --commission-max-rate=\"0.20\" --commission-max-change-rate=\"0.01\" --min-self-delegation=\"1000000\" --gas=\"auto\" --gas-prices=\"0.0025uneutaro\" --gas-adjustment=\"1.5\""
+
+# Function to fetch the latest block height from Neutaro API endpoint
+get_latest_block_height() {
+  curl -s https://api1.neutaro.tech/cosmos/base/tendermint/v1beta1/blocks/latest | jq -r '.block.header.height'
+}
+
+# Function to fetch the current block height of the local node
+get_current_block_height() {
+  Neutaro status 2>&1 | jq -r '.SyncInfo.latest_block_height'
+}
+
+# Function to check if the node is catching up
+is_node_catching_up() {
+  Neutaro status 2>&1 | jq -r '.SyncInfo.catching_up'
+}
+
+# Wait for a few seconds before starting the sync check
+echo -e "${YELLOW}Waiting for the node to initialize...${NC}"
+sleep 60  # Adjust the sleep duration as needed
+
+# Main script to check sync status
+echo -e "${GREEN}Checking Neutaro Node Sync Status...${NC}"
+
+while true; do
+  # Get the latest block height from the network
+  latest_block_height=$(get_latest_block_height)
+  if [ -z "$latest_block_height" ]; then
+    echo -ne "Failed to fetch the latest block height. Retrying...\r"
+    sleep 10
+    continue
+  fi
+
+  # Get the current block height of the node
+  current_block_height=$(get_current_block_height)
+  if [ -z "$current_block_height" ]; then
+    echo -ne "Failed to fetch the current block height of the node. Retrying...\r"
+    sleep 10
+    continue
+  fi
+
+  # Check if the node is catching up
+  if [ "$(is_node_catching_up)" == "false" ]; then
+    echo -ne "Node is fully synced! Current Block Height: $current_block_height\n"
+    break
+  fi
+
+  # Calculate progress percentage
+  progress=$(( (current_block_height * 100) / latest_block_height ))
+
+  # Display sync progress on the same line
+  echo -ne "Syncing: $progress% - Current Height: $current_block_height / Latest Height: $latest_block_height\r"
+
+  # Wait for some time before the next check
+  sleep 10
+done
 
 # End of script
