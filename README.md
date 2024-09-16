@@ -49,6 +49,7 @@ Opening port `26656` helps with better network performance and faster synchroniz
 We suggest using **Ubuntu 22.04.03**, **4 cores, 8gb RAM** and **100gb of free storage**. The storage will increase overtime, but with the suggested pruning and current state of the chain it's fine and it will be fine for a few more months. <br>
 <br>
 
+
 If you'd like to skip the manual installation and opt for a semi-automated process, follow the steps below:
 
 ### **Semi-Automated Installation**
@@ -66,6 +67,14 @@ To automatically remove the Neutaro installation, use this command:
 ```shell
 bash <(wget -qO- https://raw.githubusercontent.com/Neutaro/Neutaro/main/neutaro_remove.sh)
 ```
+
+## Validator's Best Friend: The Neutaro Help Command
+Before diving into specific commands, remember that the most valuable tool for any validator is the Neutaro help command. This command provides a comprehensive list of all available commands and their descriptions, making it easier for validators to find exactly what they need. Use it regularly to stay updated:
+
+```shell
+Neutaro help
+```
+This will display all the commands, their descriptions, and available flags for customization.
 
 # Step 1: Manual Setup - Update System and Install Dependencies
 We suggest using **Ubuntu 22.04.03**, **4 cores, 8gb RAM** and **100gb of free storage**. The storage will increase overtime, but with the suggested pruning and current state of the chain it's fine and it will be fine for a few more months. <br>
@@ -318,3 +327,10 @@ once you have a funded wallet on the node send this, **__but make sure to check 
 Neutaro tx staking create-validator --amount=1000000uneutaro --pubkey=$(Neutaro tendermint show-validator) --moniker=$MONIKER --chain-id=Neutaro-1 --from WALLET --keyring-backend os --commission-rate="0.10" --commission-max-rate="0.20" --commission-max-change-rate="0.01" --min-self-delegation="1000000" --gas="auto" --gas-prices="0.0025uneutaro" --gas-adjustment="1.5" --details "About_Your_Validator"
 ```
 
+## Validator's Best Friend: The Neutaro Help Command
+Before diving into specific commands, remember that the most valuable tool for any validator is the Neutaro help command. This command provides a comprehensive list of all available commands and their descriptions, making it easier for validators to find exactly what they need. Use it regularly to stay updated:
+
+```shell
+Neutaro help
+```
+This will display all the commands, their descriptions, and available flags for customization.
