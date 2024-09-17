@@ -1,4 +1,4 @@
-# Why You Should Care About Neutaro
+# Why Neutaro
 
 Neutaro is closely working with Timpi to help create the first truly decentralized search engine! On Neutaro, you can claim rewards for contributing to Timpi and vote on different proposals affecting Timpi, such as those regarding the ethical standpoint of the Timpi search engine.<br>
 
