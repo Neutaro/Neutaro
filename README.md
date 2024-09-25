@@ -213,9 +213,9 @@ Using a snapshot significantly speeds up the sync process:
 cd $HOME
 mv $HOME/.Neutaro/data $HOME/.Neutaro/data-old
 mv $HOME/.Neutaro/wasm $HOME/.Neutaro/wasm-old
-wget https://poker.neutaro.tech/snapshot010924.tar.lz4
-lz4 -d snapshot010924.tar.lz4 -c | tar xvf -
-rm snapshot010924.tar.lz4
+wget https://poker.neutaro.tech/latest.tar.lz4
+lz4 -d latest.tar.lz4 -c | tar xvf -
+rm latest.tar.lz4
 rm -r data-old wasm-old
 ```
 
