@@ -46,7 +46,7 @@ Opening port `26656` helps with better network performance and faster synchroniz
 
 # Running a node
 # **Prefer a Semi-Automated Installation?**
-We suggest using **Ubuntu 22.04.03**, **4 cores, 8gb RAM** and **100gb of free storage**. The storage will increase overtime, but with the suggested pruning and current state of the chain it's fine and it will be fine for a few more months. <br>
+We suggest using **Ubuntu 22.04.03**, **4 cores, 8gb RAM** and **250-500gb of free storage**. The storage will increase overtime, but with the suggested pruning and current state of the chain it's fine and it will be fine for a few more months. <br>
 <br>
 
 
@@ -77,7 +77,7 @@ Neutaro help
 This will display all the commands, their descriptions, and available flags for customization.
 
 # Step 1: Manual Setup - Update System and Install Dependencies
-We suggest using **Ubuntu 22.04.03**, **4 cores, 8gb RAM** and **100gb of free storage**. The storage will increase overtime, but with the suggested pruning and current state of the chain it's fine and it will be fine for a few more months. <br>
+We suggest using **Ubuntu 22.04.03**, **4 cores, 8gb RAM** and **250-500gb of free storage**. The storage will increase overtime, but with the suggested pruning and current state of the chain it's fine and it will be fine for a few more months. <br>
 <br>
 Ensure your system is up-to-date and install all required dependencies: <br>
 ```shell
