@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/bash 
 
 # Colors for output
 RED='\033[0;31m'
@@ -24,13 +24,6 @@ PRUNING_INTERVAL="19"
 echo -e "${GREEN}Pruning is set to custom with the following settings:${NC}"
 echo -e "${GREEN}Keep recent: $PRUNING_KEEP_RECENT, Interval: $PRUNING_INTERVAL${NC}"
 
-# Inform about persistent peers
-echo -e "${GREEN}Important: If you face sync issues due to limited seeds, you may need to add more persistent peers.${NC}"
-echo -e "${GREEN}Also, opening port 26656 for TCP connections is recommended to share your node with others and improve the network. Make sure to open this port on your router as well.${NC}"
-
-# Prompt for persistent peers (optional)
-read -p "Enter persistent peers (optional, leave blank to skip): " PERSISTENT_PEERS
-
 # Update and install dependencies
 echo -e "${GREEN}Updating and installing dependencies...${NC}"
 sudo apt update && sudo apt upgrade -y
@@ -40,11 +33,19 @@ if [ $? -ne 0 ]; then
   exit 1
 fi
 
-# Install Go
+# Install Go with fallback download links
 GO_VERSION="1.22.2"
 echo -e "${GREEN}Installing Go $GO_VERSION...${NC}"
 cd $HOME
-wget "https://golang.org/dl/go$GO_VERSION.linux-amd64.tar.gz"
+if ! curl -LO "https://dl.google.com/go/go$GO_VERSION.linux-amd64.tar.gz"; then
+  echo -e "${YELLOW}Primary download link failed. Trying alternative link...${NC}"
+  if ! curl -LO "https://go.dev/dl/go$GO_VERSION.linux-amd64.tar.gz"; then
+    echo -e "${RED}Failed to download Go. Exiting.${NC}"
+    exit 1
+  fi
+fi
+
+# Continue with Go installation
 sudo rm -rf /usr/local/go
 sudo tar -C /usr/local -xzf "go$GO_VERSION.linux-amd64.tar.gz"
 rm "go$GO_VERSION.linux-amd64.tar.gz"
@@ -63,15 +64,6 @@ cd $HOME
 git clone https://github.com/Neutaro/Neutaro || { echo -e "${RED}Failed to clone Neutaro repository. Exiting.${NC}"; exit 1; }
 cd Neutaro
 make build || { echo -e "${RED}Failed to build Neutaro. Exiting.${NC}"; exit 1; }
-
-# Install Cosmovisor
-echo -e "${GREEN}Setting up Cosmovisor...${NC}"
-mkdir -p $HOME/.Neutaro/cosmovisor/genesis/bin
-mv $HOME/Neutaro/build/Neutaro $HOME/.Neutaro/cosmovisor/genesis/bin/
-sudo ln -sfn $HOME/.Neutaro/cosmovisor/genesis $HOME/.Neutaro/cosmovisor/current
-sudo ln -sfn $HOME/.Neutaro/cosmovisor/current/bin/Neutaro /usr/local/bin/Neutaro
-cd $HOME/Neutaro/
-go install cosmossdk.io/tools/cosmovisor/cmd/cosmovisor@v1.4.0 || { echo -e "${RED}Failed to install Cosmovisor. Exiting.${NC}"; exit 1; }
 
 # Initialize and configure the node
 echo -e "${GREEN}Configuring your Neutaro node...${NC}"
@@ -101,7 +93,7 @@ echo -e "${GREEN}Downloading and applying the blockchain snapshot...${NC}"
 cd $HOME
 mv $HOME/.Neutaro/data $HOME/.Neutaro/data-old || echo "data-old directory does not exist"
 mv $HOME/.Neutaro/wasm $HOME/.Neutaro/wasm-old || echo "wasm-old directory does not exist"
-wget https://poker.neutaro.tech/latest.tar.lz4
+wget https://snapshot.neutaro.tech/latest.tar.lz4
 
 # Unpacking the snapshot with progress
 echo -e "${GREEN}Unpacking the snapshot...${NC}"
@@ -109,57 +101,6 @@ pv latest.tar.lz4 | lz4 -d - | tar xvf - -C $HOME/.Neutaro --strip-components=1 
 
 # Clean up the downloaded snapshot file
 rm -r latest.tar.lz4
-
-echo -e "${GREEN}Snapshot unpacking complete.${NC}"
-
-# Create systemd service for Neutaro
-echo -e "${GREEN}Creating systemd service for Neutaro...${NC}"
-sudo tee /etc/systemd/system/Neutaro.service > /dev/null << EOF
-[Unit]
-Description=Neutaro Node Service
-After=network-online.target
-
-[Service]
-User=$USER
-ExecStart=$(which cosmovisor) run start
-Restart=on-failure
-RestartSec=10
-LimitNOFILE=65535
-Environment="DAEMON_HOME=$HOME/.Neutaro"
-Environment="DAEMON_NAME=Neutaro"
-Environment="UNSAFE_SKIP_BACKUP=true"
-
-[Install]
-WantedBy=multi-user.target
-EOF
-
-# Enable and start the service
-echo -e "${GREEN}Starting Neutaro service...${NC}"
-sudo systemctl daemon-reload
-sudo systemctl enable Neutaro
-sudo systemctl restart Neutaro || { echo -e "${RED}Failed to start Neutaro service. Exiting.${NC}"; exit 1; }
-
-# Fix potential issues with missing binaries
-mkdir -p $HOME/.Neutaro/cosmovisor/upgrades/v2/bin
-cp $HOME/.Neutaro/cosmovisor/genesis/bin/Neutaro $HOME/.Neutaro/cosmovisor/upgrades/v2/bin/
-
-# Display sync status
-echo -e "${GREEN}Setup complete! Check the sync status with:${NC}"
-echo "Neutaro status 2>&1 | jq .SyncInfo"
-
-# Monitor the logs
-echo -e "${GREEN}To monitor the logs, use:${NC}"
-echo "sudo journalctl -fu Neutaro -o cat"
-
-# Additional Instructions for After the Node is Synced
-
-echo -e "${GREEN}Once the node is synced, follow the steps below to configure your validator and begin participating in the network:${NC}"
-
-echo -e "\n1. If needed, recover your wallet using:\n"
-echo "   Neutaro keys add WALLET --keyring-backend os --recover"
-
-echo -e "\n2. Once your wallet is funded, create your validator with:\n"
-echo "   Neutaro tx staking create-validator --amount=1000000uneutaro --pubkey=\$(Neutaro tendermint show-validator) --moniker=$MONIKER --chain-id=Neutaro-1 --from WALLET --keyring-backend os --commission-rate=\"0.10\" --details=\"About_Your_Validator\" --commission-max-rate=\"0.20\" --commission-max-change-rate=\"0.01\" --min-self-delegation=\"1000000\" --gas=\"auto\" --gas-prices=\"0.0025uneutaro\" --gas-adjustment=\"1.5\""
 
 # Function to fetch the latest block height from Neutaro API endpoint
 get_latest_block_height() {
@@ -216,4 +157,4 @@ while true; do
   sleep 10
 done
 
-# End of script
+echo -e "${GREEN}Setup complete! Check sync status or monitor logs if needed.${NC}"
