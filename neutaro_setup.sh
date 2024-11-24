@@ -12,7 +12,7 @@ echo -e "${GREEN}Starting Neutaro Validator Auto-Setup Script${NC}"
 read -p "Enter your moniker name: " MONIKER
 
 # Set default seeds and pruning options
-DEFAULT_SEEDS="0e24a596dc34e7063ec2938baf05d09b374709e6@109.199.106.233:26656,84ae242b0c4c14af59a61438ba2eca4573b91c95@seed0.neutaro.tech:36656"
+DEFAULT_SEEDS="0e24a596dc34e7063ec2938baf05d09b374709e6@109.199.106.233:26656" 
 read -p "Enter seeds (default: $DEFAULT_SEEDS): " SEEDS
 SEEDS=${SEEDS:-$DEFAULT_SEEDS} # Use default if input is empty
 
@@ -101,7 +101,7 @@ echo -e "${GREEN}Downloading and applying the blockchain snapshot...${NC}"
 cd $HOME
 mv $HOME/.Neutaro/data $HOME/.Neutaro/data-old || echo "data-old directory does not exist"
 mv $HOME/.Neutaro/wasm $HOME/.Neutaro/wasm-old || echo "wasm-old directory does not exist"
-wget https://poker.neutaro.tech/latest.tar.lz4
+wget https://snapshot.neutaro.tech/latest.tar.lz4
 
 # Unpacking the snapshot with progress
 echo -e "${GREEN}Unpacking the snapshot...${NC}"
