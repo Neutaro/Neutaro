@@ -12,7 +12,7 @@ echo -e "${GREEN}Starting Neutaro Validator Auto-Setup Script${NC}"
 read -p "Enter your moniker name: " MONIKER
 
 # Set default seeds and pruning options
-DEFAULT_SEEDS="0e24a596dc34e7063ec2938baf05d09b374709e6@109.199.106.233:26656"
+DEFAULT_SEEDS="0e24a596dc34e7063ec2938baf05d09b374709e6@109.199.106.233:26656,84ae242b0c4c14af59a61438ba2eca4573b91c95@seed0.neutaro.tech:26656"
 read -p "Enter seeds (default: $DEFAULT_SEEDS): " SEEDS
 SEEDS=${SEEDS:-$DEFAULT_SEEDS} # Use default if input is empty
 
