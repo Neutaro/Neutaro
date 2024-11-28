@@ -101,7 +101,7 @@ echo -e "${GREEN}Downloading and applying the blockchain snapshot...${NC}"
 cd $HOME
 mv $HOME/.Neutaro/data $HOME/.Neutaro/data-old || echo "data-old directory does not exist"
 mv $HOME/.Neutaro/wasm $HOME/.Neutaro/wasm-old || echo "wasm-old directory does not exist"
-wget https://poker.neutaro.tech/latest.tar.lz4
+wget https://snapshot.neutaro.tech/latest.tar.lz4
 
 # Unpacking the snapshot with progress
 echo -e "${GREEN}Unpacking the snapshot...${NC}"
