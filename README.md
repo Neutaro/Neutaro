@@ -224,7 +224,7 @@ Create a systemd service file for Neutaro: <br>
 ```shell
 sudo vim /etc/systemd/system/Neutaro.service
 ```
-Add the following configuration:
+Add the following configuration (if you already have information set in the /Neutaro.services skip this step:
 ```shell
 [Unit]
 Description=Neutaro Node Service
