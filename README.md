@@ -114,14 +114,13 @@ cd $HOME
 git clone https://github.com/Neutaro/Neutaro
 cd Neutaro
 make build
-go install
+go install cosmossdk.io/tools/cosmovisor/cmd/cosmovisor@v1.4.0
 ```
 
 ### Step 4: Set Up Cosmovisor Directories and Install Neutaro Binary
 Set up cosmovisor directories and move the Neutaro binary:
 <br>
 ```shell
-cosmossdk.io/tools/cosmovisor/cmd/cosmovisor@v1.4.0
 mkdir -p $HOME/.Neutaro/cosmovisor/genesis/bin
 cp $HOME/Neutaro/build/Neutaro $HOME/.Neutaro/cosmovisor/genesis/bin/
 ln -sfn $HOME/.Neutaro/cosmovisor/genesis $HOME/.Neutaro/cosmovisor/current
