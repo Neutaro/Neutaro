@@ -146,7 +146,7 @@ curl -f http://154.26.153.186/genesis.json > ~/.Neutaro/config/genesis.json
 ## Step 7: Apply Snapshot
 Download and extract the snapshot:
 ```shell
-SNAPSHOT_URL="http://explorer.neutaro.io/snapshot-neutaro/latest.tar.lz4"
+SNAPSHOT_URL="http://173.212.198.246/snapshot-neutaro/latest.tar.lz4"
 cd $HOME/.Neutaro
 wget $SNAPSHOT_URL -O latest.tar.lz4
 lz4 -d latest.tar.lz4 | tar -xvf - -C $HOME/.Neutaro
