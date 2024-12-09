@@ -45,7 +45,6 @@ Opening port `26656` helps with better network performance and faster synchroniz
 
 
 # Running a node
-# **Prefer a Semi-Automated Installation?**
 We suggest using **Ubuntu 22.04.03**, **4 cores, 8gb RAM** and **250-500gb of free storage**. The storage will increase overtime, but with the suggested pruning and current state of the chain it's fine and it will be fine for a few more months. <br>
 <br>
 
