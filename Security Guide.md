@@ -113,8 +113,7 @@ Always prioritize the security and stability of your node and validate actions c
 1. **Identify critical files to back up:**
    - `priv_validator_key.json`
    - `node_key.json`
-   - `config.toml`
-
+   
 2. **Use `rsync` or `scp` to copy files to a secure backup server:**
 
     ```shell
