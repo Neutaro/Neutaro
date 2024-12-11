@@ -247,7 +247,7 @@ Neutaro status 2>&1 | jq .SyncInfo
 ## Step 12: Become a Validator
 Create or recover a wallet:
 ```shell
-Neutaro keys add WALLET --keyring-backend os --recover
+sudo Neutaro keys add WALLET --keyring-backend os --recover
 ```
 
 Send the validator transaction. **Make sure you are fully synced before you send the command. (update parameters as needed in example below):**
