@@ -78,20 +78,30 @@ sudo apt update && sudo apt install -y \
 ```
 
 
-## Step 2: Install Go
+# Step 2: Install Go
 ```shell
 GO_VERSION="1.22.2"
 wget "https://golang.org/dl/go$GO_VERSION.linux-amd64.tar.gz"
 sudo rm -rf /usr/local/go
 sudo tar -C /usr/local -xzf "go$GO_VERSION.linux-amd64.tar.gz"
 rm "go$GO_VERSION.linux-amd64.tar.gz"
-echo "export PATH=$PATH:/usr/local/go/bin:$HOME/go/bin" >> ~/.bash_profile
+```
+
+# Ensure Go is accessible for both user and sudo
+```shell
+echo "export PATH=/usr/local/go/bin:$HOME/go/bin:$PATH" | tee -a ~/.bash_profile ~/.bashrc
 source ~/.bash_profile
+```
+
+# Fix sudo not recognizing Go
+```shell
+sudo ln -sf /usr/local/go/bin/go /usr/bin/go
 ```
 
 ## Verify Go installation:
 ```shell
 go version
+sudo go version
 ```
 
 
