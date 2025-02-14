@@ -52,7 +52,7 @@ mkdir -p ~/Upgrade
 cd ~/Upgrade
 ```
 
-## Clone the Velocent Neutaro Repository
+## Clone the Neutaro Repository
 ```shell
 git clone https://github.com/Neutaro/Neutaro
 cd Neutaro
@@ -65,7 +65,7 @@ make build
 
 ## Verify the New Binary
 ```shell
-./build/Neutaro version
+Neutaro version --long
 ```
 
 ## :white_check_mark: Check that it says
