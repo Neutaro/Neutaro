@@ -121,7 +121,7 @@ cp build/Neutaro $HOME/.Neutaro/cosmovisor/upgrades/v2/bin
 
 ## Verify the upgrade:
 ```shell
-$HOME/.Neutaro/cosmovisor/upgrades/v2/bin/Neutaro version
+$HOME/.Neutaro/cosmovisor/upgrades/v2/bin/Neutaro version --long
 ```
 
 ## Step 4: Install Cosmovisor
