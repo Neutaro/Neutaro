@@ -92,6 +92,9 @@ mv build/Neutaro ~/.Neutaro/cosmovisor/current/bin/Neutaro
 ```shell
 ls -lh ~/.Neutaro/cosmovisor/current/bin/Neutaro
 ```
+```shell
+Neutaro version --long
+```
 ## :white_check_mark: Ensure the file exists and has the correct permissions.
 `-rwxrwxr-x 1 <your-user-name> 68M feb 13 19:42 /home/<your-user-name>/.Neutaro/cosmovisor/current/bin/Neutaro`
 ### Start the Validator
