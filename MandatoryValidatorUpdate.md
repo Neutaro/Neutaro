@@ -65,7 +65,7 @@ make build
 
 ## Verify the New Binary
 ```shell
-Neutaro version --long
+./build/Neutaro version --long
 ```
 
 ## :white_check_mark: Check that it says
