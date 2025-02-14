@@ -5,7 +5,6 @@ Neutaro is closely working with Timpi to help create the first truly decentraliz
 ## Neutaro Validator Security Guide
 For more details on security, please check the [Security Guide](https://github.com/Neutaro/Neutaro/blob/main/Security%20Guide.md).
 
-
 ## Introduction
 Running a node means that you run the chains binary. Follow these steps to create a Validator that runs as a service on linux. <br>
 You can be a part of Neutaro by holding tokens and delegating them, running a node, or becoming a validator.
@@ -43,11 +42,9 @@ Ensure port `26656` is open for **TCP** traffic in your router's Port Forwarding
 
 Opening port `26656` helps with better network performance and faster synchronization.
 
-
 # Running a node
 We suggest using **Ubuntu 22.04.03**, **4 cores, 8gb RAM** and **250-500gb of free storage**. The storage will increase overtime, but with the suggested pruning and current state of the chain it's fine and it will be fine for a few more months. <br>
 <br>
-
 
 #### **Automated Removal of Neutaro Validator**
 
@@ -77,7 +74,6 @@ sudo apt update && sudo apt install -y \
     bsdmainutils git make ncdu gcc chrony liblz4-tool pv
 ```
 
-
 ## Step 2: Install Go
 ```shell
 GO_VERSION="1.22.2"
@@ -104,7 +100,6 @@ go version
 sudo go version
 ```
 
-
 ## Step 3: Clone and Build Neutaro
 ```shell
 cd $HOME
@@ -113,11 +108,21 @@ cd Neutaro
 make build
 ```
 
-Check the Neutaro version:
+## Check the Neutaro version:
 ```shell
 ./build/Neutaro version
 ```
 
+## Move the new binary to the Cosmovisor upgrade directory:
+```shell
+mkdir -p $HOME/.Neutaro/cosmovisor/upgrades/v2/bin
+cp build/Neutaro $HOME/.Neutaro/cosmovisor/upgrades/v2/bin
+```
+
+## Verify the upgrade:
+```shell
+$HOME/.Neutaro/cosmovisor/upgrades/v2/bin/Neutaro version
+```
 
 ## Step 4: Install Cosmovisor
 ```shell
@@ -127,7 +132,6 @@ cp build/Neutaro $HOME/.Neutaro/cosmovisor/genesis/bin
 ln -s $HOME/.Neutaro/cosmovisor/genesis $HOME/.Neutaro/cosmovisor/current
 sudo ln -s $HOME/.Neutaro/cosmovisor/current/bin/Neutaro /usr/local/bin/Neutaro
 ```
-
 
 ## Step 5: Initialize the Node
 Replace `YourMonikerName` with your desired moniker:
@@ -172,27 +176,8 @@ Check the extracted files:
 ```shell
 ls -l $HOME/.Neutaro
 ```
-## Step 8: Upgrade to the Latest Version
-```shell
-cd $HOME/Neutaro
-git fetch --all --tags
-git checkout v2.0.0
-make build
-```
 
-Move the new binary to the Cosmovisor upgrade directory:
-```shell
-mkdir -p $HOME/.Neutaro/cosmovisor/upgrades/v2/bin
-cp build/Neutaro $HOME/.Neutaro/cosmovisor/upgrades/v2/bin
-```
-
-Verify the upgrade:
-```shell
-$HOME/.Neutaro/cosmovisor/upgrades/v2/bin/Neutaro version
-```
-
-
-## Step 9: Configure the Systemd Service
+## Step 8: Configure the Systemd Service
 Create the `Neutaro.service` file using `nano`:
 ```shell
 sudo nano /etc/systemd/system/Neutaro.service
@@ -235,8 +220,7 @@ WantedBy=multi-user.target
 EOF
 ```
 
-
-## Step 10: Enable and Start the Service
+## Step 9: Enable and Start the Service
 Reload the systemd daemon and enable the service:
 ```shell
 sudo systemctl daemon-reload
@@ -252,15 +236,13 @@ Check the logs:
 sudo journalctl -fu Neutaro -o cat
 ```
 
-
-## Step 11: Verify Sync Status
+## Step 10: Verify Sync Status
 Run the following command to verify the node's sync status:
 ```shell
 Neutaro status 2>&1 | jq .SyncInfo
 ```
 
-
-## Step 12: Become a Validator
+## Step 11: Become a Validator
 Create or recover a wallet:
 ```shell
 sudo Neutaro keys add WALLET --keyring-backend os --recover
