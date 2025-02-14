@@ -1,16 +1,31 @@
-# Action required: Mandatory ONLY for running Validators Update
-### ALL Validators need to update the binary of their already installed/running nodes.
+**Mandatory Update for All Neutaro Validators**  
 
-### If you plan to setup a full Neutaro validator go for full guide under README.MD
+All validators **must** update their binary to ensure the stability and security of their nodes. If you are setting up a **new** Neutaro validator, refer to the **full setup guide** in `README.md`.
 
-We have some outdated modules in the current deployment which need updating as soon as possible across all validators.
+### **Why This Update is Required**
+Some outdated modules in the current deployment need to be updated **immediately** to maintain network integrity.  
 
-### Preparation
-Before starting please make sure you have a backup in place. As a minimum ensure you have a backup: 
+### **Preparation**
+Before proceeding, ensure you have a **backup** of your validator setup. At a minimum, back up:  
 
-⁠validator-sdk-update⁠
+:warning: 1. Preparation (Backup Important Files)
+Before updating, make sure you back up critical files to avoid data loss.
 
-Even better - have another Validator node synced and ready for failover in case of issues.
+Backup the Validator Keys
+
+```bash
+cp ~/.Neutaro/config/priv_validator_key.json ~/priv_validator_key_backup.json
+cp ~/.Neutaro/config/node_key.json ~/node_key_backup.json
+```
+
+Verify backup:
+```bash
+ls -lh ~ | grep priv_validator_key_backup.json
+ls -lh ~ | grep node_key_backup.json
+```
+:white_check_mark: If both files appear, your backup is successful.
+
+For added security, we recommend having a **secondary, fully synced validator node** ready as a failover in case of issues.
 
 ## Ensure Go is accessible for both user and sudo
 ```shell
@@ -29,7 +44,7 @@ go version
 sudo go version
 ```
 
-## Download & Build the New Neutaro Binary
+## Download & Build the New Neutaro Binary ✅ **`validator-sdk-update`**  
 
 Create an Upgrade Directory
 ```shell
@@ -43,12 +58,12 @@ git clone https://github.com/Neutaro/Neutaro
 cd Neutaro
 ```
 
-##Build the New Neutaro Binary
+## Build the New Neutaro Binary
 ```shell
 make build
 ```
 
-##Verify the New Binary
+## Verify the New Binary
 ```shell
 ./build/Neutaro version
 ```
@@ -77,9 +92,8 @@ mv build/Neutaro ~/.Neutaro/cosmovisor/current/bin/Neutaro
 ```shell
 ls -lh ~/.Neutaro/cosmovisor/current/bin/Neutaro
 ```
-
 ## :white_check_mark: Ensure the file exists and has the correct permissions.
-
+`-rwxrwxr-x 1 <your-user-name> 68M feb 13 19:42 /home/<your-user-name>/.Neutaro/cosmovisor/current/bin/Neutaro`
 ### Start the Validator
 ```shell
 sudo systemctl start Neutaro
