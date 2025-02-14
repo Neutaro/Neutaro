@@ -109,8 +109,7 @@ make build
 ```
 
 ## Check the Neutaro version:
-```shell
-Neutaro version --long
+`./build/Neutaro version --long
 ```
 
 ## Move the new binary to the Cosmovisor upgrade directory:
