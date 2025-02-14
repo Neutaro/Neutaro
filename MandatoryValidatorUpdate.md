@@ -93,7 +93,7 @@ mv build/Neutaro ~/.Neutaro/cosmovisor/current/bin/Neutaro
 ls -lh ~/.Neutaro/cosmovisor/current/bin/Neutaro
 ```
 ```shell
-~/.Neutaro/cosmovisor/current/bin/Neutaro version --long
+$HOME/.Neutaro/cosmovisor/upgrades/v2/bin/Neutaro version --long
 ```
 ## :white_check_mark: Ensure the file exists and has the correct permissions.
 `-rwxrwxr-x 1 <your-user-name> 68M feb 13 19:42 /home/<your-user-name>/.Neutaro/cosmovisor/current/bin/Neutaro`
