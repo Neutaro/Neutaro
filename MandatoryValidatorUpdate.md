@@ -73,7 +73,7 @@ make build
 go: go version go1.22.2 linux/amd64
 name: '"neutaro"'
 server_name: '"Neutaro"'
-version: 2.0.1 in the bottom
+version: 2.0.1-13-g535bafd
 `
 
 ## Stop the Validator
