@@ -51,11 +51,14 @@ By running a validator, you:
 
 ## 🐧 Validator for Linux (Ubuntu 22.04.03+)
 
-👉 **[Neutaro Validator Setup Guide](https://github.com/Neutaro/Neutaro/blob/main/Instructions/NeutaroInstallation.md)**  
+👉 **[Neutaro Validator Setup Guide(https://github.com/Neutaro/Neutaro/blob/main/Instructions/NeutaroInstallation.md)**  
 Includes full source build, `cosmovisor` setup, pruning, snapshots, firewall rules, and systemd instructions.
 
----
+🛠️ **[Validator Command Reference →](https://github.com/Neutaro/Neutaro/blob/main/Instructions/NeutaroValidatorCommands.md)**
+Includes commands for editing validator settings, voting on proposals, delegating/redelegating, unjailing, unbonding, and transferring tokens.
 
+
+---
 ## 💡 Delegate Instead of Validating?
 
 Not ready to run a full validator?  
