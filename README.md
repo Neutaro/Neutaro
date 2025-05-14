@@ -51,7 +51,7 @@ By running a validator, you:
 
 ## 🐧 Validator for Linux (Ubuntu 22.04.03+)
 
-👉 **[Neutaro Validator Setup Guide(https://github.com/Neutaro/Neutaro/blob/main/Instructions/NeutaroInstallation.md)**  
+👉 **[Neutaro Validator Setup Guide](https://github.com/Neutaro/Neutaro/blob/main/Instructions/NeutaroInstallation.md)**  
 Includes full source build, `cosmovisor` setup, pruning, snapshots, firewall rules, and systemd instructions.
 
 🛠️ **[Validator Command Reference →](https://github.com/Neutaro/Neutaro/blob/main/Instructions/NeutaroValidatorCommands.md)**
