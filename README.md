@@ -23,6 +23,21 @@ As a Neutaro participant, you can:
 
 ---
 
+## 🛡️ Security First
+
+Running a validator comes with responsibility.  
+Please read the official Neutaro **Security Guide** to help protect your node from common threats:
+
+👉 **[Validator Security Guide →](https://github.com/Neutaro/Neutaro/blob/main/SecurityGuide.md)**
+
+Covers:
+- Linux hardening
+- Firewall rules
+- Backup strategies
+- Key management
+
+---
+
 ## 🔧 Validator Overview
 
 Validators play a critical role by securing the Neutaro chain and processing transactions.  
