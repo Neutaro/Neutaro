@@ -145,7 +145,7 @@ Neutaro init $MONIKER --chain-id Neutaro-1
 ## Step 6: Configure the Node
 Edit configuration files using `sed` commands:
 ```shell
-sed -i "s/^seeds *=.*/seeds = \"84ae242b0c4c14af59a61438ba2eca4573b91c95@109.199.106.233:26656,0e24a596dc34e7063ec2938baf05d09b374709e6@109.199.106.233:26656\"/" $HOME/.Neutaro/config/config.toml
+sed -i "s/^seeds *=.*/seeds = \"84ae242b0c4c14af59a61438ba2eca4573b91c95@109.199.106.233:26656,0e24a596dc34e7063ec2938baf05d09b374709e6@109.199.106.233:26656,84ae242b0c4c14af59a61438ba2eca4573b91c95@109.199.106.233:36656\"/" $HOME/.Neutaro/config/config.toml
 sed -i "s/^pruning *=.*/pruning = \"custom\"/" $HOME/.Neutaro/config/app.toml
 sed -i "s/^pruning-keep-recent *=.*/pruning-keep-recent = \"100\"/" $HOME/.Neutaro/config/app.toml
 sed -i "s/^pruning-interval *=.*/pruning-interval = \"19\"/" $HOME/.Neutaro/config/app.toml
