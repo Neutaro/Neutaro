@@ -102,7 +102,7 @@ This is the **recommended method** for new validators and node operators.
 
 ### 📘 Fast Sync & State Sync Guide
 
-👉 **[Neutaro State Sync & Fast Node Guide →](https://github.com/johnolofs/timpi/blob/main/Neutaro/statesync.md)**
+👉 **[Neutaro State Sync & Fast Node Guide →](https://github.com/Neutaro/Neutaro/blob/main/statesync.md)**
 
 This guide provides a **complete, reinstall-safe setup**, including:
 
