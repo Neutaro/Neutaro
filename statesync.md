@@ -13,7 +13,7 @@ On Neutaro, you can:
 ## SECURITY (READ FIRST)
 
 Before running infrastructure, review the official security guide:
-[https://github.com/Neutaro/Neutaro/blob/main/Security%20Guide.md](https://github.com/Neutaro/Neutaro/blob/main/Security%20Guide.md)
+[https://github.com/Neutaro/Neutaro/blob/main/SecurityGuide.md](https://github.com/Neutaro/Neutaro/blob/main/SecurityGuide.md)
 
 ---
 
