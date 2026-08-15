@@ -156,13 +156,26 @@ here for step 8 first, since the service must exist before you start it.
 
 ### Option B — Snapshot download
 
+Tested 2026-08-15: a ~10.5 GB download (~21 GB unpacked to ~20 GB of `data/`), then the node
+block-syncs from the snapshot's height to the tip.
+
 ```shell
 cd $HOME/.Neutaro
 SNAPSHOT_URL="http://173.212.198.246/snapshot-neutaro/latest.tar.lz4"
 wget "$SNAPSHOT_URL" -O latest.tar.lz4
-lz4 -t latest.tar.lz4 && lz4 -d latest.tar.lz4 | tar -xvf - -C $HOME/.Neutaro
+lz4 -t latest.tar.lz4 && lz4 -dc latest.tar.lz4 | tar -xf - -C $HOME/.Neutaro
 rm -f latest.tar.lz4
 ```
+
+(`-dc`, not `-d`: without `-c`, lz4 only *happens* to stream into the pipe and prints
+*"Do not rely on this behavior: use explicit `-c` instead!"* — its own authors' words.)
+
+> 🔴 **Validators: the snapshot archive contains the provider's `data/priv_validator_state.json`
+> and it lands in your data directory.** On a fresh node that is harmless. On a **validator**,
+> extracting a snapshot silently replaces your double-sign guard with the provider's — a record of
+> heights far below what your key has signed — and the next start can double-sign
+> ([`statesync.md`](../statesync.md) §10.1: permanent tombstone). After extracting, restore **your
+> own** post-stop copy of `priv_validator_state.json` (§10.3 step 4) before starting.
 
 With a snapshot it can take a while before the node starts syncing — see
 [`statesync.md`](../statesync.md) §11.4b: a node with a lot of data looks hung on startup and
