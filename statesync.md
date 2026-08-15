@@ -855,7 +855,8 @@ The #1 failure. Four causes, in order of likelihood:
 2. **Too few snapshot-serving peers.** Check `n_peers`. If you are stuck on 1–2, the seed has not
    populated your address book yet; wait, or add more `persistent_peers` (§11.3).
 3. **The offering peer keeps dropping you** (`Stopping peer for error err=EOF` on a loop against a
-   single peer) — its inbound slots are full. Add peers.
+   single peer) — its inbound slots are full, **or it is running in seed mode** (see §11.2b). Add
+   peers, or check that node's `seed_mode`.
 
 4. **The node you are re-syncing is itself one of the `rpc_servers`.** Found the hard way while
    re-syncing `rpc3.neutaro.io`: the light client uses the second entry as its *witness*, and that
@@ -914,6 +915,38 @@ Both `rpc_servers` timed out. Usually transient — CometBFT retries with the ne
 recovers on its own (it did here). If it persists, the RPCs are down or you are rate-limited; re-run
 `state_sync.sh` to pick a fresh pair. You need **two distinct** entries in `rpc_servers`; one is
 rejected.
+
+### 11.2b `ERR Stopping peer for error err=EOF` loops forever against ONE peer
+
+Hundreds of these per minute, always the same peer, reconnect → instant EOF → reconnect:
+
+```
+ERR Stopping peer for error err=EOF module=p2p peer="Peer{MConn{<ip>:26656} <id> out}"
+```
+
+If that peer is in your `persistent_peers`, check whether the node behind it runs
+**`seed_mode = true`**. A seed-mode node *accepts* the connection, exchanges addresses, and
+**hangs up — by design**. CometBFT then persistently redials it forever. Two consequences on the
+seed-mode node itself: it never keeps more than a handful of peers (everyone gets dropped), and
+every node that lists it as a persistent peer burns cycles in this loop.
+
+Found in production on `Neutaro-1`: the `rpc2` full node still had `seed_mode = true` left over
+from before the dedicated seed existed — every box pointing at it looped like this for months.
+
+**Fix:**
+- Never put a seed (dedicated or seed-mode) in `persistent_peers`. Seeds belong in `seeds` only.
+- If the seed-mode node is yours and a *dedicated* seed already exists: set `seed_mode = false`
+  and restart it. The EOF loops fleet-wide die the moment it comes back as a normal peer.
+
+### 11.4b Restarted, `active`, but RPC silent for a very long time — it is NOT hung
+
+On a node with large databases (an archive, or any box with hundreds of GB in `data/`), a restart
+can take **15–60+ minutes** before `:26657` answers, with almost nothing in the log. Measured on
+`Neutaro-1`: a pruned 9 G node answers in seconds; a 1.9 T archive took **44 minutes**.
+
+It *looks* hung. It is opening its databases. **Do not restart it again "to unstick it"** — that
+puts you back at minute zero. Wait longer than feels reasonable, then wait more. The only real
+red flags are the process exiting (`systemctl is-active` ≠ active) or a `panic` in the log.
 
 ### 11.5 Service will not start
 
