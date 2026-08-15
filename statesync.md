@@ -835,7 +835,7 @@ df -h / && du -sh ~/.Neutaro/data/*
 
 ### 11.2 `Discovered new snapshot` repeats forever, never `Offering snapshot to ABCI app`
 
-The #1 failure. Three causes, in order of likelihood:
+The #1 failure. Four causes, in order of likelihood:
 
 1. **Trust height is above every available snapshot.** Compare:
    ```bash
@@ -856,6 +856,17 @@ The #1 failure. Three causes, in order of likelihood:
    populated your address book yet; wait, or add more `persistent_peers` (§11.3).
 3. **The offering peer keeps dropping you** (`Stopping peer for error err=EOF` on a loop against a
    single peer) — its inbound slots are full. Add peers.
+
+4. **The node you are re-syncing is itself one of the `rpc_servers`.** Found the hard way while
+   re-syncing `rpc3.neutaro.io`: the light client uses the second entry as its *witness*, and that
+   witness was the node being wiped — sitting at height 0, unable to confirm any header, so
+   verification never completes even though snapshots *above* the trust height are being discovered.
+   The symptom is identical to cause 1, but the trust height is fine. Fix: point both entries at the
+   *other* RPC — duplicates are allowed:
+   ```toml
+   rpc_servers = "https://rpc2.neutaro.io:443,https://rpc2.neutaro.io:443"
+   ```
+   This applies any time you rebuild one of the chain's public RPC endpoints.
 
 ### 11.3 Verify a peer before you trust the config
 
