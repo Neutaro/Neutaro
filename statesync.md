@@ -940,13 +940,16 @@ from before the dedicated seed existed — every box pointing at it looped like 
 
 ### 11.4b Restarted, `active`, but RPC silent for a very long time — it is NOT hung
 
-On a node with large databases (an archive, or any box with hundreds of GB in `data/`), a restart
-can take **15–60+ minutes** before `:26657` answers, with almost nothing in the log. Measured on
-`Neutaro-1`: a pruned 9 G node answers in seconds; a 1.9 T archive took **44 minutes**.
+Startup time scales with the size of `data/`. A freshly state-synced node (a few GB) answers on
+`:26657` within seconds; a node carrying **hundreds of GB or more can take 15–60+ minutes** before
+RPC responds, with almost nothing in the log while it opens its databases.
 
-It *looks* hung. It is opening its databases. **Do not restart it again "to unstick it"** — that
-puts you back at minute zero. Wait longer than feels reasonable, then wait more. The only real
-red flags are the process exiting (`systemctl is-active` ≠ active) or a `panic` in the log.
+This matters most to exactly the reader of this guide: the node whose disk filled up — the reason
+you are here — is by definition a big one, and after a restart it *looks* hung. It is not.
+**Do not restart it again "to unstick it"** — that puts you back at minute zero, and do **not**
+reach for `unsafe-reset-all` out of impatience (§10.2). Wait longer than feels reasonable, then
+wait more. The only real red flags are the process exiting (`systemctl is-active` ≠ active) or a
+`panic` in the log.
 
 ### 11.5 Service will not start
 
