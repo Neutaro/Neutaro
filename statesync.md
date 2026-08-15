@@ -379,6 +379,10 @@ d891af90afdcf3973f7dc44eef316dfe652ccb1c@38.242.135.246:26656"
 
 ### 8.1 Prime trust height and hash
 
+> **Requires the `tomlset.py` helper from §7.1** — if you jumped straight here (for example from
+> the Installation guide's step 7), create that file first or this script exits with
+> `tomlset.py: No such file or directory`.
+
 Save as `~/state_sync.sh`:
 
 ```bash
@@ -915,6 +919,24 @@ Both `rpc_servers` timed out. Usually transient — CometBFT retries with the ne
 recovers on its own (it did here). If it persists, the RPCs are down or you are rate-limited; re-run
 `state_sync.sh` to pick a fresh pair. You need **two distinct** entries in `rpc_servers`; one is
 rejected.
+
+### 11.2a `auth failure: secret conn failed: connection reset by peer` from EVERY peer
+
+The node dials out, TCP connects, and the CometBFT handshake is instantly reset — by *every* peer,
+from second zero. Meanwhile `Ensure peers` shows `numDialing=0` forever.
+
+**Cause: another Neutaro node is already running behind the same public IP** — a second box on the
+same home network, a container on a node host, a VM. Peers filter duplicate IPs: the connection
+slot for your public IP is already taken by the first node, so every peer it is connected to
+rejects yours during the handshake (`filtered CONN: duplicate CONN` on the peer's side).
+
+Verified live: a fresh node behind the same NAT as a running validator was reset by every peer the
+validator held; pointed at peers the validator was **not** connected to, the same node synced in
+under two minutes.
+
+**Fix:** set `persistent_peers` to nodes the *other* machine is not connected to (check its
+`curl -s localhost:26657/net_info | jq -r '.result.peers[].remote_ip'`). Two nodes behind one IP
+can coexist — they just cannot share the same peers.
 
 ### 11.2b `ERR Stopping peer for error err=EOF` loops forever against ONE peer
 
