@@ -1,3 +1,9 @@
+> ⚠️ **Historical document — the February 2026 mandatory update (`validator-sdk-update`).**
+> If you are setting up a new validator today, `make build` from `main` already includes this;
+> follow [`Instructions/NeutaroInstallation.md`](Instructions/NeutaroInstallation.md) instead.
+> The version string below reflects the binary *at the time of that update* — a current build
+> reports a newer commit suffix, which is expected.
+
 **Mandatory Update for All Neutaro Validators**  
 
 All validators **must** update their binary to ensure the stability and security of their nodes. If you are setting up a **new** Neutaro validator, refer to the **full setup guide** in `README.md`.
@@ -83,14 +89,15 @@ sudo systemctl stop Neutaro
 
 ## :white_check_mark: Ensure the service is fully stopped before proceeding.
 
-Move the New Binary to Cosmovisor
+Move the New Binary to Cosmovisor — into the directory cosmovisor **actually runs**, which after
+the v2 upgrade is `upgrades/v2/bin` (check with `readlink ~/.Neutaro/cosmovisor/current`):
 ```shell
-mv build/Neutaro ~/.Neutaro/cosmovisor/current/bin/Neutaro
+mv build/Neutaro ~/.Neutaro/cosmovisor/upgrades/v2/bin/Neutaro
 ```
 
 ## Check That the Binary Was Moved Correctly
 ```shell
-ls -lh ~/.Neutaro/cosmovisor/current/bin/Neutaro
+ls -lh ~/.Neutaro/cosmovisor/upgrades/v2/bin/Neutaro
 ```
 ```shell
 $HOME/.Neutaro/cosmovisor/upgrades/v2/bin/Neutaro version --long

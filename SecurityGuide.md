@@ -21,13 +21,13 @@ Always prioritize the security and stability of your node and validate actions c
 1. **When creating or managing your validator, use the `--keyring-backend os` flag**:
 
     ```shell
-    neutaro keys add YourValidatorKey --keyring-backend os
+    Neutaro keys add YourValidatorKey --keyring-backend os
     ```
 
 2. **Whenever you manage keys (e.g., viewing, deleting), always use `--keyring-backend os`:**
 
     ```shell
-    neutaro keys list --keyring-backend os
+    Neutaro keys list --keyring-backend os
     ```
 
 #### **b. Never Store Seed Phrases Locally**
@@ -114,10 +114,13 @@ Always prioritize the security and stability of your node and validate actions c
    - `priv_validator_key.json`
    - `node_key.json`
    
+   A copied file is not a proven backup — see [`statesync.md`](statesync.md) §1 for how to
+   **verify** that a key backup can actually restore your validator.
+
 2. **Use `rsync` or `scp` to copy files to a secure backup server:**
 
     ```shell
-    rsync -avz ~/.neutaro/config/ user@backupserver:/path/to/backup/
+    rsync -avz ~/.Neutaro/config/ user@backupserver:/path/to/backup/
     ```
 
 3. **Set up a cron job to automate backups:**
@@ -131,7 +134,7 @@ Always prioritize the security and stability of your node and validate actions c
    - **Add the following line for daily backups at midnight:**
 
     ```shell
-    0 0 * * * rsync -avz ~/.neutaro/config/ user@backupserver:/path/to/backup/
+    0 0 * * * rsync -avz ~/.Neutaro/config/ user@backupserver:/path/to/backup/
     ```
 
 #### **b. Quick Recovery Plan**
@@ -175,7 +178,7 @@ Always prioritize the security and stability of your node and validate actions c
 1. **Use `journalctl` or `grep` to search for suspicious activity:**
 
     ```shell
-    sudo journalctl -u neutaro | grep 'error'
+    sudo journalctl -u Neutaro | grep 'error'
     ```
 
 2. **Ensure logging is enabled in `config.toml`:**

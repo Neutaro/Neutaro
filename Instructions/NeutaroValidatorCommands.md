@@ -3,6 +3,10 @@
 This page contains essential CLI commands for running and managing a Neutaro validator, delegating, voting, and handling unbonding/transfer of tokens.
 
 > 🧠 All commands assume you are running on **Ubuntu 22.04.4+** with the `Neutaro` binary installed and configured. Replace placeholders (`YourWallet`, `ValidatorAddress`, etc.) with your actual data.
+>
+> ⚠️ **Never run `Neutaro keys` or `tx` commands with `sudo`** — sudo uses *root's* keyring, and
+> your wallet will seem to vanish for every command run without it. Use the same
+> `--keyring-backend` you created the key with, consistently.
 
 ---
 
@@ -17,7 +21,7 @@ sudo systemctl restart Neutaro
 
 # Monitor validator logs in real time
 sudo journalctl -fu Neutaro -o cat
-````
+```
 
 ---
 
@@ -42,7 +46,7 @@ Neutaro tx staking edit-validator \
 | Set Website              | `--website "https://nordicnodes.blogspot.com/"`                |
 | Set Description          | `--details "A reliable and trusted validator."`                |
 | Minimum Self Delegation  | `--min-self-delegation 1000000`                                |
-| Set Gas / Broadcast Mode | `--gas auto --gas-prices 0.025uneutaro --broadcast-mode block` |
+| Set Gas | `--gas auto --gas-adjustment 1.4 --gas-prices 0.025uneutaro` |
 | Optional Memo            | `--memo "Updating validator settings"`                         |
 
 ### ✅ Full Example
@@ -60,10 +64,14 @@ Neutaro tx staking edit-validator \
   --details "A reliable and trusted validator." \
   --min-self-delegation 1000000 \
   --gas auto \
+  --gas-adjustment 1.4 \
   --gas-prices 0.025uneutaro \
-  --broadcast-mode block \
   --memo "Updating validator settings"
 ```
+
+> ℹ️ `--broadcast-mode block` was **removed in Cosmos SDK 0.47** — commands using it fail. The
+> default (`sync`) returns a tx hash immediately; confirm with
+> `Neutaro query tx <hash>` a few seconds later.
 
 ---
 
@@ -182,4 +190,4 @@ Neutaro status 2>&1 | jq .SyncInfo
 
 📌 Feel free to bookmark this page or print it out as your **Validator Command Cheat Sheet**.
 
-````
+```
