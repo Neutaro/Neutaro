@@ -1,0 +1,22 @@
+services:
+  neutaro:
+    image: neutaro:node
+    container_name: neutaro-node
+    restart: unless-stopped
+    stop_grace_period: 30s
+    volumes:
+      - neutaro-data:/neutaro
+    ports:
+      - "26656:26656"            # P2P — open in your firewall/router too
+      - "127.0.0.1:26657:26657"  # RPC — localhost only by default
+    logging:
+      driver: json-file
+      options:                   # without this, Docker's log file grows forever
+        max-size: "50m"
+        max-file: "3"
+    # environment:
+    #   MONIKER: my-docker-node
+    #   PERSISTENT_PEERS: "id@host:26656,..."   # see the duplicate-IP note in the guide
+    #   STATESYNC: "auto"                       # auto | on | off
+volumes:
+  neutaro-data:
