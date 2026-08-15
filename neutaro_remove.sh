@@ -5,6 +5,24 @@ RED='\033[0;31m'
 GREEN='\033[0;32m'
 NC='\033[0m' # No Color
 
+# ------------------------------------------------------------------
+# SAFETY GATE: this script deletes ~/.Neutaro INCLUDING YOUR VALIDATOR
+# KEYS and wallet keyring. That identity can never be recreated.
+# ------------------------------------------------------------------
+echo -e "${RED}WARNING:${NC} this will permanently delete:"
+echo "  - \$HOME/.Neutaro   (INCLUDING priv_validator_key.json and your keyring)"
+echo "  - \$HOME/Neutaro    (the source checkout)"
+echo "  - /usr/local/go     (the system-wide Go install, also used by other software)"
+echo
+echo "If there is ANY chance you want this validator identity again, back up"
+echo "\$HOME/.Neutaro/config/priv_validator_key.json and your keyring first."
+echo
+read -r -p "Type 'delete' to proceed: " CONFIRM
+if [ "$CONFIRM" != "delete" ]; then
+    echo "Aborted. Nothing was removed."
+    exit 1
+fi
+
 # Function to show progress with success or failure message
 show_progress() {
     local -r msg=$1
@@ -30,7 +48,7 @@ show_progress "Removing Neutaro service file" "sudo rm -f /etc/systemd/system/Ne
 show_progress "Reloading systemd daemon" "sudo systemctl daemon-reload > /dev/null 2>&1"
 
 # Removing Neutaro and Cosmovisor binaries and configurations
-show_progress "Removing Neutaro and Cosmovisor binaries and configurations" "sudo rm -rf $HOME/.Neutaro > /dev/null 2>&1 && sudo rm -rf $HOME/Neutaro > /dev/null 2>&1 && sudo rm -rf /usr/local/bin/Neutaro > /dev/null 2>&1 && sudo rm -rf $HOME/go/bin/cosmovisor > /dev/null 2>&1 && sudo rm -rf $HOME/.bash_profile > /dev/null 2>&1"
+show_progress "Removing Neutaro and Cosmovisor binaries and configurations" "sudo rm -rf $HOME/.Neutaro > /dev/null 2>&1 && sudo rm -rf $HOME/Neutaro > /dev/null 2>&1 && sudo rm -rf /usr/local/bin/Neutaro > /dev/null 2>&1 && sudo rm -rf $HOME/go/bin/cosmovisor > /dev/null 2>&1"
 
 # Cleaning up Go installation
 show_progress "Cleaning up Go installation" "sudo rm -rf /usr/local/go > /dev/null 2>&1"
