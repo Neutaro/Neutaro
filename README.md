@@ -30,6 +30,7 @@ This repository is the primary entry point for anyone who wants to:
 | Guide | When you need it |
 |---|---|
 | [Installation](Instructions/NeutaroInstallation.md) | New node or validator, from clean Ubuntu to running service |
+| [Docker Node](Instructions/NeutaroDocker.md) | A full node in two commands — state-synced in minutes, cannot sign for any validator |
 | [State Sync & Snapshot Provider](statesync.md) | Fast sync (~10 min), **key backup + verification**, serving snapshots, validator-safe maintenance, troubleshooting |
 | [Validator Commands](Instructions/NeutaroValidatorCommands.md) | Day-to-day: edit, delegate, vote, unjail, transfer |
 | [Security Guide](SecurityGuide.md) | Hardening the server and the keys |
