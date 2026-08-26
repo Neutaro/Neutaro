@@ -19,7 +19,7 @@ This repository is the primary entry point for anyone who wants to:
 | Binary | `Neutaro` (Cosmos SDK v0.47, CometBFT v0.37) |
 | Token | `NTMPI` — `1 NTMPI = 1,000,000 uneutaro` |
 | Seed | `84ae242b0c4c14af59a61438ba2eca4573b91c95@109.199.106.233:36656` |
-| Public RPC | `https://rpc2.neutaro.io` · `https://rpc3.neutaro.io` |
+| Public RPC | `https://rpc2.neutaro.io` |
 | Public API (LCD) | `https://api2.neutaro.io` |
 | Genesis sha256 | `78724fe90e5bd1f2abd0186bd0c33325e3c190d8e417741a42ff0c7fbdf2fc2d` |
 | Explorer | `https://explorer.neutaro.io` |

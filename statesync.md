@@ -336,8 +336,8 @@ APP="$HOME/.Neutaro/config/app.toml"
 
 SEEDS="84ae242b0c4c14af59a61438ba2eca4573b91c95@109.199.106.233:36656"
 PEERS="0e24a596dc34e7063ec2938baf05d09b374709e6@109.199.106.233:26656,\
-726d5975dd11383a175d1b748526257d3749058c@185.182.184.50:26656,\
-95f6fc822469efdf868ab6cdfc218fa80f716951@62.84.180.12:26656,\
+\
+\
 90dcafcc67687feff6d1b355892a3690c6cb71f3@185.182.184.8:26656,\
 d891af90afdcf3973f7dc44eef316dfe652ccb1c@38.242.135.246:26656"
 
@@ -391,7 +391,7 @@ Save as `~/state_sync.sh`:
 set -euo pipefail
 CONFIG="$HOME/.Neutaro/config/config.toml"
 RPC1="https://rpc2.neutaro.io:443"
-RPC2="https://rpc3.neutaro.io:443"
+RPC2="https://rpc2.neutaro.io:443"   # rpc3 retired 2026-08-26; duplicates are allowed in rpc_servers
 LAG="${TRUST_LAG:-10000}"          # blocks behind tip; MUST be > the provider's snapshot interval
 
 pick_rpc() {
@@ -894,19 +894,21 @@ curl -s https://rpc2.neutaro.io/net_info \
   | jq -r '.result.peers[] | "\(.node_info.id)@\(.remote_ip):26656  # \(.node_info.moniker)"'
 ```
 
-Verified live 2026-08-14:
+Verified live 2026-08-26 (the 2026-08-25 server retirement removed several long-standing peers —
+re-verify this list rather than trusting any copy of it):
 
 | Peer | Moniker |
 |---|---|
 | `0e24a596dc34e7063ec2938baf05d09b374709e6@109.199.106.233:26656` | NeutaroRPC (rpc2) |
-| `726d5975dd11383a175d1b748526257d3749058c@185.182.184.50:26656` | Rock (rpc3) |
-| `95f6fc822469efdf868ab6cdfc218fa80f716951@62.84.180.12:26656` | archivenode |
-| `90dcafcc67687feff6d1b355892a3690c6cb71f3@185.182.184.8:26656` | Jinnx |
+| `d6c8714a14d6f5c99756b22b7fade065b2cae56b@100.42.180.106:26656` | Timpi-StateSync |
+| `10333501f9b6204b240a1581e8fc2fe84f704622@213.199.49.225:26656` | Archive2 |
+| `2fd06277f46e845ca73df8f81caf68e6579bbe32@86.48.20.122:26656` | Neutaro (payout) |
 | `d891af90afdcf3973f7dc44eef316dfe652ccb1c@38.242.135.246:26656` | TimpiTap |
+| `5225956661fa6bad61d7681fdb70174eb24f35e4@173.212.198.192:26656` | — |
 
 Seed (port **36656**, not 26656): `84ae242b0c4c14af59a61438ba2eca4573b91c95@109.199.106.233:36656`
 
-Note `rpc.neutaro.io` does **not** resolve; use `rpc2` / `rpc3`.
+Note `rpc.neutaro.io` does **not** resolve, and `rpc3`/`api3` were retired with their server on 2026-08-26 — `rpc2` is the public endpoint.
 
 ### 11.4 `no witnesses connected. please reset light client`
 

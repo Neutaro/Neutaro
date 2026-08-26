@@ -92,7 +92,7 @@ cd docker && docker compose up -d && docker compose logs -f
 | `STATESYNC` | `auto` | `auto` = prime only when data is empty · `on` · `off` |
 | `TRUST_LAG` | `10000` | blocks behind tip for the trust height (see `statesync.md` §11.2) |
 | `GENESIS_URL` / `GENESIS_SHA256` | official | change both together or not at all |
-| `RPC1` / `RPC2` | rpc2/rpc3.neutaro.io | light-client verification endpoints |
+| `RPC1` / `RPC2` | both rpc2.neutaro.io | light-client verification endpoints (rpc3 retired 2026-08-26) |
 
 Example — custom moniker and your own peers:
 
