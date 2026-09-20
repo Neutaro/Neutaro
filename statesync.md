@@ -334,8 +334,8 @@ chmod +x "$HOME/tomlset.py"
 CONFIG="$HOME/.Neutaro/config/config.toml"
 APP="$HOME/.Neutaro/config/app.toml"
 
-SEEDS="84ae242b0c4c14af59a61438ba2eca4573b91c95@109.199.106.233:36656"
-PEERS="0e24a596dc34e7063ec2938baf05d09b374709e6@109.199.106.233:26656,\
+SEEDS="579a88c8a36d557811a56cc1fa1d615df6a10d9a@213.199.49.225:36656"
+PEERS="10333501f9b6204b240a1581e8fc2fe84f704622@213.199.49.225:26656,\
 \
 \
 90dcafcc67687feff6d1b355892a3690c6cb71f3@185.182.184.8:26656,\
@@ -884,7 +884,7 @@ Always test before committing a peer list:
 
 ```bash
 nc -vz 147.93.4.184 26656          # -> times out (dead)
-nc -vz 109.199.106.233 26656       # -> succeeded
+nc -vz 213.199.49.225 26656       # -> succeeded
 ```
 
 Harvest live peers from a public RPC instead of trusting a static list:
@@ -899,14 +899,14 @@ re-verify this list rather than trusting any copy of it):
 
 | Peer | Moniker |
 |---|---|
-| `0e24a596dc34e7063ec2938baf05d09b374709e6@109.199.106.233:26656` | NeutaroRPC (rpc2) |
+| `10333501f9b6204b240a1581e8fc2fe84f704622@213.199.49.225:26656` | Archive2 (was rpc2) |
 | `d6c8714a14d6f5c99756b22b7fade065b2cae56b@100.42.180.106:26656` | Timpi-StateSync |
 | `10333501f9b6204b240a1581e8fc2fe84f704622@213.199.49.225:26656` | Archive2 |
 | `2fd06277f46e845ca73df8f81caf68e6579bbe32@86.48.20.122:26656` | Neutaro (payout) |
 | `d891af90afdcf3973f7dc44eef316dfe652ccb1c@38.242.135.246:26656` | TimpiTap |
 | `5225956661fa6bad61d7681fdb70174eb24f35e4@173.212.198.192:26656` | — |
 
-Seed (port **36656**, not 26656): `84ae242b0c4c14af59a61438ba2eca4573b91c95@109.199.106.233:36656`
+Seed (port **36656**, not 26656): `579a88c8a36d557811a56cc1fa1d615df6a10d9a@213.199.49.225:36656`
 
 Note `rpc.neutaro.io` does **not** resolve, and `rpc3`/`api3` were retired with their server on 2026-08-26 — `rpc2` is the public endpoint.
 

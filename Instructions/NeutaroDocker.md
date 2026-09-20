@@ -87,7 +87,7 @@ cd docker && docker compose up -d && docker compose logs -f
 | Variable | Default | Meaning |
 |---|---|---|
 | `MONIKER` | `docker-node` | node name |
-| `SEEDS` | the official seed (`…@109.199.106.233:36656`) | comma-separated |
+| `SEEDS` | the official seed (`…@213.199.49.225:36656`) | comma-separated |
 | `PERSISTENT_PEERS` | a verified-live set | comma-separated `id@host:port` |
 | `STATESYNC` | `auto` | `auto` = prime only when data is empty · `on` · `off` |
 | `TRUST_LAG` | `10000` | blocks behind tip for the trust height (see `statesync.md` §11.2) |

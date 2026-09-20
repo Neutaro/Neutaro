@@ -112,7 +112,7 @@ Configure — the seed, pruning, and a real gas denom:
 CONFIG="$HOME/.Neutaro/config/config.toml"
 APP="$HOME/.Neutaro/config/app.toml"
 
-sed -i 's|^seeds *=.*|seeds = "84ae242b0c4c14af59a61438ba2eca4573b91c95@109.199.106.233:36656"|' "$CONFIG"
+sed -i 's|^seeds *=.*|seeds = "579a88c8a36d557811a56cc1fa1d615df6a10d9a@213.199.49.225:36656"|' "$CONFIG"
 
 sed -i \
   -e 's|^pruning *=.*|pruning = "custom"|' \
