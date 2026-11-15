@@ -1,0 +1,1025 @@
+{
+  "genesis_time": "2023-07-25T10:48:11.525747832Z",
+  "chain_id": "Neutaro-1",
+  "initial_height": "1",
+  "consensus_params": {
+    "block": {
+      "max_bytes": "22020096",
+      "max_gas": "-1",
+      "time_iota_ms": "1000"
+    },
+    "evidence": {
+      "max_age_num_blocks": "100000",
+      "max_age_duration": "172800000000000",
+      "max_bytes": "1048576"
+    },
+    "validator": {
+      "pub_key_types": [
+        "ed25519"
+      ]
+    },
+    "version": {}
+  },
+  "app_hash": "",
+  "app_state": {
+    "auth": {
+      "params": {
+        "max_memo_characters": "256",
+        "tx_sig_limit": "7",
+        "tx_size_cost_per_byte": "10",
+        "sig_verify_cost_ed25519": "590",
+        "sig_verify_cost_secp256k1": "1000"
+      },
+      "accounts": [
+        {
+          "@type": "/cosmos.auth.v1beta1.BaseAccount",
+          "address": "neutaro120x4dsxgmttmp8p83a7jhqga2xngfy0l4pqh08",
+          "pub_key": null,
+          "account_number": "0",
+          "sequence": "0"
+        },
+        {
+          "@type": "/cosmos.auth.v1beta1.BaseAccount",
+          "address": "neutaro1urwskgalgnpl2jef2v3znreh2wkj9wqhrcpj38",
+          "pub_key": null,
+          "account_number": "0",
+          "sequence": "0"
+        },
+        {
+          "@type": "/cosmos.auth.v1beta1.BaseAccount",
+          "address": "neutaro1yu8ysshvr5hwee5n36pue0mwsw694rxuxvj0j8",
+          "pub_key": null,
+          "account_number": "0",
+          "sequence": "0"
+        },
+        {
+          "@type": "/cosmos.auth.v1beta1.BaseAccount",
+          "address": "neutaro1f0qhstc6rr87yrwuxtt50e3xrapctdlskwea4r",
+          "pub_key": null,
+          "account_number": "0",
+          "sequence": "0"
+        },
+        {
+          "@type": "/cosmos.auth.v1beta1.BaseAccount",
+          "address": "neutaro13uyssdqyjmu7yths3kfvcdyksxpktr3e3dn7ca",
+          "pub_key": null,
+          "account_number": "0",
+          "sequence": "0"
+        },
+        {
+          "@type": "/cosmos.auth.v1beta1.BaseAccount",
+          "address": "neutaro10vqs4t7v5t3uwytpj5ndadna3836yhny32xqeh",
+          "pub_key": null,
+          "account_number": "0",
+          "sequence": "0"
+        },
+        {
+          "@type": "/cosmos.auth.v1beta1.BaseAccount",
+          "address": "neutaro1pe8fq9y2sl05m6evfeqesrrcrmqrky5kzrsr5w",
+          "pub_key": null,
+          "account_number": "0",
+          "sequence": "0"
+        },
+        {
+          "@type": "/cosmos.auth.v1beta1.BaseAccount",
+          "address": "neutaro165ul0ttkhgycp2rp3se3xeq7k7xz0wwek3q7ec",
+          "pub_key": null,
+          "account_number": "0",
+          "sequence": "0"
+        },
+        {
+          "@type": "/cosmos.auth.v1beta1.BaseAccount",
+          "address": "neutaro13n7667ldreqgxjhx8mq6ns8jqq843r9argj6y4",
+          "pub_key": null,
+          "account_number": "0",
+          "sequence": "0"
+        },
+        {
+          "@type": "/cosmos.auth.v1beta1.BaseAccount",
+          "address": "neutaro1j88mhldsxq7j8scf5l5pp3p098ccfuh4klxxuz",
+          "pub_key": null,
+          "account_number": "0",
+          "sequence": "0"
+        },
+        {
+          "@type": "/cosmos.auth.v1beta1.BaseAccount",
+          "address": "neutaro1muwvdnht2a8fxeqjxtcc0jxf9d4e4zjhgrhuuz",
+          "pub_key": null,
+          "account_number": "0",
+          "sequence": "0"
+        }
+      ]
+    },
+    "authz": {
+      "authorization": []
+    },
+    "bank": {
+      "params": {
+        "send_enabled": [],
+        "default_send_enabled": true
+      },
+      "balances": [
+        {
+          "address": "neutaro1pe8fq9y2sl05m6evfeqesrrcrmqrky5kzrsr5w",
+          "coins": [
+            {
+              "denom": "uneutaro",
+              "amount": "1000000"
+            }
+          ]
+        },
+        {
+          "address": "neutaro1yu8ysshvr5hwee5n36pue0mwsw694rxuxvj0j8",
+          "coins": [
+            {
+              "denom": "uneutaro",
+              "amount": "1000000"
+            }
+          ]
+        },
+        {
+          "address": "neutaro1f0qhstc6rr87yrwuxtt50e3xrapctdlskwea4r",
+          "coins": [
+            {
+              "denom": "uneutaro",
+              "amount": "1000000"
+            }
+          ]
+        },
+        {
+          "address": "neutaro120x4dsxgmttmp8p83a7jhqga2xngfy0l4pqh08",
+          "coins": [
+            {
+              "denom": "uneutaro",
+              "amount": "1000000"
+            }
+          ]
+        },
+        {
+          "address": "neutaro10vqs4t7v5t3uwytpj5ndadna3836yhny32xqeh",
+          "coins": [
+            {
+              "denom": "uneutaro",
+              "amount": "1000000"
+            }
+          ]
+        },
+        {
+          "address": "neutaro13n7667ldreqgxjhx8mq6ns8jqq843r9argj6y4",
+          "coins": [
+            {
+              "denom": "uneutaro",
+              "amount": "1000000"
+            }
+          ]
+        },
+        {
+          "address": "neutaro13uyssdqyjmu7yths3kfvcdyksxpktr3e3dn7ca",
+          "coins": [
+            {
+              "denom": "uneutaro",
+              "amount": "1000000"
+            }
+          ]
+        },
+        {
+          "address": "neutaro1j88mhldsxq7j8scf5l5pp3p098ccfuh4klxxuz",
+          "coins": [
+            {
+              "denom": "uneutaro",
+              "amount": "1000000"
+            }
+          ]
+        },
+        {
+          "address": "neutaro165ul0ttkhgycp2rp3se3xeq7k7xz0wwek3q7ec",
+          "coins": [
+            {
+              "denom": "uneutaro",
+              "amount": "1000000"
+            }
+          ]
+        },
+        {
+          "address": "neutaro1muwvdnht2a8fxeqjxtcc0jxf9d4e4zjhgrhuuz",
+          "coins": [
+            {
+              "denom": "uneutaro",
+              "amount": "399999990000000"
+            }
+          ]
+        },
+        {
+          "address": "neutaro1urwskgalgnpl2jef2v3znreh2wkj9wqhrcpj38",
+          "coins": [
+            {
+              "denom": "uneutaro",
+              "amount": "1000000"
+            }
+          ]
+        }
+      ],
+      "supply": [],
+      "denom_metadata": [
+        {
+          "description": "The native token of Neutaro.",
+          "denom_units": [
+            {
+              "denom": "uneutaro",
+              "exponent": 0,
+              "aliases": [
+                "microneutaro"
+              ]
+            },
+            {
+              "denom": "mneutaro",
+              "exponent": 3,
+              "aliases": [
+                "millineutaro"
+              ]
+            },
+            {
+              "denom": "neutaro",
+              "exponent": 6,
+              "aliases": []
+            }
+          ],
+          "base": "uneutaro",
+          "display": "neutaro",
+          "name": "neutaro",
+          "symbol": "$ntmpi"
+        }
+      ]
+    },
+    "capability": {
+      "index": "1",
+      "owners": []
+    },
+    "crisis": {
+      "constant_fee": {
+        "denom": "uneutaro",
+        "amount": "1000"
+      }
+    },
+    "distribution": {
+      "params": {
+        "community_tax": "0.020000000000000000",
+        "base_proposer_reward": "0.010000000000000000",
+        "bonus_proposer_reward": "0.040000000000000000",
+        "withdraw_addr_enabled": true
+      },
+      "fee_pool": {
+        "community_pool": []
+      },
+      "delegator_withdraw_infos": [],
+      "previous_proposer": "",
+      "outstanding_rewards": [],
+      "validator_accumulated_commissions": [],
+      "validator_historical_rewards": [],
+      "validator_current_rewards": [],
+      "delegator_starting_infos": [],
+      "validator_slash_events": []
+    },
+    "evidence": {
+      "evidence": []
+    },
+    "feegrant": {
+      "allowances": []
+    },
+    "genutil": {
+      "gen_txs": [
+        {
+          "body": {
+            "messages": [
+              {
+                "@type": "/cosmos.staking.v1beta1.MsgCreateValidator",
+                "description": {
+                  "moniker": "Neutaro",
+                  "identity": "",
+                  "website": "",
+                  "security_contact": "",
+                  "details": ""
+                },
+                "commission": {
+                  "rate": "0.100000000000000000",
+                  "max_rate": "0.200000000000000000",
+                  "max_change_rate": "0.010000000000000000"
+                },
+                "min_self_delegation": "1",
+                "delegator_address": "neutaro1yu8ysshvr5hwee5n36pue0mwsw694rxuxvj0j8",
+                "validator_address": "neutarovaloper1yu8ysshvr5hwee5n36pue0mwsw694rxuu3lxlu",
+                "pubkey": {
+                  "@type": "/cosmos.crypto.ed25519.PubKey",
+                  "key": "OcxAfGK0fkiTz/WGWx8CCNJZhDrLW8pjzqEXTrkhAo8="
+                },
+                "value": {
+                  "denom": "uneutaro",
+                  "amount": "1000000"
+                }
+              }
+            ],
+            "memo": "2fd06277f46e845ca73df8f81caf68e6579bbe32@86.48.20.122:26656",
+            "timeout_height": "0",
+            "extension_options": [],
+            "non_critical_extension_options": []
+          },
+          "auth_info": {
+            "signer_infos": [
+              {
+                "public_key": {
+                  "@type": "/cosmos.crypto.secp256k1.PubKey",
+                  "key": "AvtDcEXxhXz+m51mwN3NKmwL85/SEOsEpc8z+qSw5KGa"
+                },
+                "mode_info": {
+                  "single": {
+                    "mode": "SIGN_MODE_DIRECT"
+                  }
+                },
+                "sequence": "0"
+              }
+            ],
+            "fee": {
+              "amount": [],
+              "gas_limit": "200000",
+              "payer": "",
+              "granter": ""
+            }
+          },
+          "signatures": [
+            "V4i4ViVfrok+ePiCzhsqhc/YG9gsCGyGEH0B/4iSdEU343ttpPQjYA7Mk1aqmEvbIDWAKCtlgJ/7NtsocLrHvw=="
+          ]
+        },
+        {
+          "body": {
+            "messages": [
+              {
+                "@type": "/cosmos.staking.v1beta1.MsgCreateValidator",
+                "description": {
+                  "moniker": "Xayu",
+                  "identity": "",
+                  "website": "",
+                  "security_contact": "",
+                  "details": ""
+                },
+                "commission": {
+                  "rate": "0.100000000000000000",
+                  "max_rate": "0.200000000000000000",
+                  "max_change_rate": "0.010000000000000000"
+                },
+                "min_self_delegation": "1",
+                "delegator_address": "neutaro10vqs4t7v5t3uwytpj5ndadna3836yhny32xqeh",
+                "validator_address": "neutarovaloper10vqs4t7v5t3uwytpj5ndadna3836yhnythtf5v",
+                "pubkey": {
+                  "@type": "/cosmos.crypto.ed25519.PubKey",
+                  "key": "Nv8CeAN64aBkG/Ccp6lB8/zMa3TaCRfn7lzAtYbW/Go="
+                },
+                "value": {
+                  "denom": "uneutaro",
+                  "amount": "1000000"
+                }
+              }
+            ],
+            "memo": "38bc975c6ec30f258ec4d07e2ce62170e42271b0@217.31.109.198:26656",
+            "timeout_height": "0",
+            "extension_options": [],
+            "non_critical_extension_options": []
+          },
+          "auth_info": {
+            "signer_infos": [
+              {
+                "public_key": {
+                  "@type": "/cosmos.crypto.secp256k1.PubKey",
+                  "key": "AmI1G5ljPKrv7CE+vDGsYJER4W3J5Gm7Fs1UJEP4rJ0b"
+                },
+                "mode_info": {
+                  "single": {
+                    "mode": "SIGN_MODE_DIRECT"
+                  }
+                },
+                "sequence": "0"
+              }
+            ],
+            "fee": {
+              "amount": [],
+              "gas_limit": "200000",
+              "payer": "",
+              "granter": ""
+            }
+          },
+          "signatures": [
+            "f0F3Qb7op7kVqnN7dUj75trEr9Ep4lci1qzedYnbqZ4lzsxZnKP4PMV/NOcgFVXCjDq7X0JVhycsDaSHGCn8lg=="
+          ]
+        },
+        {
+          "body": {
+            "messages": [
+              {
+                "@type": "/cosmos.staking.v1beta1.MsgCreateValidator",
+                "description": {
+                  "moniker": "Sava",
+                  "identity": "",
+                  "website": "",
+                  "security_contact": "",
+                  "details": ""
+                },
+                "commission": {
+                  "rate": "0.100000000000000000",
+                  "max_rate": "0.200000000000000000",
+                  "max_change_rate": "0.010000000000000000"
+                },
+                "min_self_delegation": "1",
+                "delegator_address": "neutaro13uyssdqyjmu7yths3kfvcdyksxpktr3e3dn7ca",
+                "validator_address": "neutarovaloper13uyssdqyjmu7yths3kfvcdyksxpktr3ets7h4x",
+                "pubkey": {
+                  "@type": "/cosmos.crypto.ed25519.PubKey",
+                  "key": "atPLJxFKV5QqgMH9yurtCMG8wTeEAGx7brD6e7jEOWo="
+                },
+                "value": {
+                  "denom": "uneutaro",
+                  "amount": "1000000"
+                }
+              }
+            ],
+            "memo": "4146fed2bf13d3fc555374cda8e130072ddee38b@185.166.46.154:26656",
+            "timeout_height": "0",
+            "extension_options": [],
+            "non_critical_extension_options": []
+          },
+          "auth_info": {
+            "signer_infos": [
+              {
+                "public_key": {
+                  "@type": "/cosmos.crypto.secp256k1.PubKey",
+                  "key": "AjYOFZa4G0q9AUet0h4IYMOvjRgGHoXnZazWrdOQvePK"
+                },
+                "mode_info": {
+                  "single": {
+                    "mode": "SIGN_MODE_DIRECT"
+                  }
+                },
+                "sequence": "0"
+              }
+            ],
+            "fee": {
+              "amount": [],
+              "gas_limit": "200000",
+              "payer": "",
+              "granter": ""
+            }
+          },
+          "signatures": [
+            "xHc+I9yK4+CLDMa+9pLagwGUWW68a3/iwwTroDo1KzRghy5cMp9jBMWZCH4SyTcWYTpd4DXVfY6qTZtlpE/sZw=="
+          ]
+        },
+        {
+          "body": {
+            "messages": [
+              {
+                "@type": "/cosmos.staking.v1beta1.MsgCreateValidator",
+                "description": {
+                  "moniker": "OlaBero",
+                  "identity": "",
+                  "website": "",
+                  "security_contact": "",
+                  "details": ""
+                },
+                "commission": {
+                  "rate": "0.100000000000000000",
+                  "max_rate": "0.200000000000000000",
+                  "max_change_rate": "0.010000000000000000"
+                },
+                "min_self_delegation": "1",
+                "delegator_address": "neutaro1j88mhldsxq7j8scf5l5pp3p098ccfuh4klxxuz",
+                "validator_address": "neutarovaloper1j88mhldsxq7j8scf5l5pp3p098ccfuh4vzt03e",
+                "pubkey": {
+                  "@type": "/cosmos.crypto.ed25519.PubKey",
+                  "key": "ECp6lANddUzVtTqq+yYusELqLxMNIIOxVGlUQS6VWZk="
+                },
+                "value": {
+                  "denom": "uneutaro",
+                  "amount": "1000000"
+                }
+              }
+            ],
+            "memo": "4758f0fee678193feecb5318c96891664bc5eaf7@158.174.135.188:26656",
+            "timeout_height": "0",
+            "extension_options": [],
+            "non_critical_extension_options": []
+          },
+          "auth_info": {
+            "signer_infos": [
+              {
+                "public_key": {
+                  "@type": "/cosmos.crypto.secp256k1.PubKey",
+                  "key": "A7iOYd814PLwL7VhwCMLv0+DsFJxVAw7hJXtOPPYGae8"
+                },
+                "mode_info": {
+                  "single": {
+                    "mode": "SIGN_MODE_DIRECT"
+                  }
+                },
+                "sequence": "0"
+              }
+            ],
+            "fee": {
+              "amount": [],
+              "gas_limit": "200000",
+              "payer": "",
+              "granter": ""
+            }
+          },
+          "signatures": [
+            "61DX96o7D4YiYaiBv5QZySkRQuGVTZ0OCBlN3OuUy7QnchivTWPGM9JkUeHszCZwIdQv3Mv6TmOvmTUcLbzEfw=="
+          ]
+        },
+        {
+          "body": {
+            "messages": [
+              {
+                "@type": "/cosmos.staking.v1beta1.MsgCreateValidator",
+                "description": {
+                  "moniker": "Magnet",
+                  "identity": "",
+                  "website": "",
+                  "security_contact": "",
+                  "details": ""
+                },
+                "commission": {
+                  "rate": "0.100000000000000000",
+                  "max_rate": "0.200000000000000000",
+                  "max_change_rate": "0.010000000000000000"
+                },
+                "min_self_delegation": "1",
+                "delegator_address": "neutaro1urwskgalgnpl2jef2v3znreh2wkj9wqhrcpj38",
+                "validator_address": "neutarovaloper1urwskgalgnpl2jef2v3znreh2wkj9wqhe9vmuu",
+                "pubkey": {
+                  "@type": "/cosmos.crypto.ed25519.PubKey",
+                  "key": "u+GO7LcQyXXvGtXRMsW92BKVG7oXZRo1Se+kuqsKkqM="
+                },
+                "value": {
+                  "denom": "uneutaro",
+                  "amount": "1000000"
+                }
+              }
+            ],
+            "memo": "5225956661fa6bad61d7681fdb70174eb24f35e4@165.140.242.58:26656",
+            "timeout_height": "0",
+            "extension_options": [],
+            "non_critical_extension_options": []
+          },
+          "auth_info": {
+            "signer_infos": [
+              {
+                "public_key": {
+                  "@type": "/cosmos.crypto.secp256k1.PubKey",
+                  "key": "Av6oJqmL/49ZV0C2cWFFK392w47Rler1gEeuB7f37J0s"
+                },
+                "mode_info": {
+                  "single": {
+                    "mode": "SIGN_MODE_DIRECT"
+                  }
+                },
+                "sequence": "0"
+              }
+            ],
+            "fee": {
+              "amount": [],
+              "gas_limit": "200000",
+              "payer": "",
+              "granter": ""
+            }
+          },
+          "signatures": [
+            "Vg64DC0eHiEpL6rzyixz9scnXnggt7vqGzfRqrOKtutKEJ90czBp7KD2X+S8w9ZD1bHucLfRO2zgiT1c6VS5OA=="
+          ]
+        },
+        {
+          "body": {
+            "messages": [
+              {
+                "@type": "/cosmos.staking.v1beta1.MsgCreateValidator",
+                "description": {
+                  "moniker": "Johnolofs",
+                  "identity": "",
+                  "website": "",
+                  "security_contact": "",
+                  "details": ""
+                },
+                "commission": {
+                  "rate": "0.100000000000000000",
+                  "max_rate": "0.200000000000000000",
+                  "max_change_rate": "0.010000000000000000"
+                },
+                "min_self_delegation": "1",
+                "delegator_address": "neutaro13n7667ldreqgxjhx8mq6ns8jqq843r9argj6y4",
+                "validator_address": "neutarovaloper13n7667ldreqgxjhx8mq6ns8jqq843r9ae4lnfw",
+                "pubkey": {
+                  "@type": "/cosmos.crypto.ed25519.PubKey",
+                  "key": "y3+W7ZjZ4GtN55dLXMWrPfFkJK2OLhr+pDYfbWB0wTw="
+                },
+                "value": {
+                  "denom": "uneutaro",
+                  "amount": "1000000"
+                }
+              }
+            ],
+            "memo": "6c52dcbbe3fe7eaea5ba20706c3d7d62b44f710d@95.209.133.141:26656",
+            "timeout_height": "0",
+            "extension_options": [],
+            "non_critical_extension_options": []
+          },
+          "auth_info": {
+            "signer_infos": [
+              {
+                "public_key": {
+                  "@type": "/cosmos.crypto.secp256k1.PubKey",
+                  "key": "A9uuUiHtp1k1Br0ajm446fbMWsvsAyFZKgqojm3rXkNE"
+                },
+                "mode_info": {
+                  "single": {
+                    "mode": "SIGN_MODE_DIRECT"
+                  }
+                },
+                "sequence": "0"
+              }
+            ],
+            "fee": {
+              "amount": [],
+              "gas_limit": "200000",
+              "payer": "",
+              "granter": ""
+            }
+          },
+          "signatures": [
+            "diBz2z4aahfQUoEKdvekWcwvnPKuRaLmB51GNkfMUGFwsgEKOs2xDfM3cUXC2kVsHLZ1YY4sN/5VHymuv0ISpw=="
+          ]
+        },
+        {
+          "body": {
+            "messages": [
+              {
+                "@type": "/cosmos.staking.v1beta1.MsgCreateValidator",
+                "description": {
+                  "moniker": "Flush",
+                  "identity": "79E14FB4E5BE4F30",
+                  "website": "",
+                  "security_contact": "",
+                  "details": ""
+                },
+                "commission": {
+                  "rate": "0.100000000000000000",
+                  "max_rate": "0.200000000000000000",
+                  "max_change_rate": "0.010000000000000000"
+                },
+                "min_self_delegation": "1",
+                "delegator_address": "neutaro165ul0ttkhgycp2rp3se3xeq7k7xz0wwek3q7ec",
+                "validator_address": "neutarovaloper165ul0ttkhgycp2rp3se3xeq7k7xz0wwevvdh5r",
+                "pubkey": {
+                  "@type": "/cosmos.crypto.ed25519.PubKey",
+                  "key": "VG76WBWTc59bg6h9gEhiLYZYsWtNB+UWzHBaAPuKQE8="
+                },
+                "value": {
+                  "denom": "uneutaro",
+                  "amount": "1000000"
+                }
+              }
+            ],
+            "memo": "a80a97c00bd89128f36b43b502a6652921dd0cfc@82.146.90.183:26656",
+            "timeout_height": "0",
+            "extension_options": [],
+            "non_critical_extension_options": []
+          },
+          "auth_info": {
+            "signer_infos": [
+              {
+                "public_key": {
+                  "@type": "/cosmos.crypto.secp256k1.PubKey",
+                  "key": "A96Kn8j75WXzvQXhn4eL69ORlTed9TgdoZ74Qry5arys"
+                },
+                "mode_info": {
+                  "single": {
+                    "mode": "SIGN_MODE_DIRECT"
+                  }
+                },
+                "sequence": "0"
+              }
+            ],
+            "fee": {
+              "amount": [],
+              "gas_limit": "200000",
+              "payer": "",
+              "granter": ""
+            }
+          },
+          "signatures": [
+            "7vnkASitQd02CnC+2ACuXFdfGHFDOKlAi0coiUXGgmlPCFFE366MWtKBFt/RUj934XAvoEzPGyD1uPd9HjWsQw=="
+          ]
+        },
+        {
+          "body": {
+            "messages": [
+              {
+                "@type": "/cosmos.staking.v1beta1.MsgCreateValidator",
+                "description": {
+                  "moniker": "Bucky",
+                  "identity": "",
+                  "website": "",
+                  "security_contact": "",
+                  "details": ""
+                },
+                "commission": {
+                  "rate": "0.100000000000000000",
+                  "max_rate": "0.200000000000000000",
+                  "max_change_rate": "0.010000000000000000"
+                },
+                "min_self_delegation": "1",
+                "delegator_address": "neutaro1f0qhstc6rr87yrwuxtt50e3xrapctdlskwea4r",
+                "validator_address": "neutarovaloper1f0qhstc6rr87yrwuxtt50e3xrapctdlsvn55cc",
+                "pubkey": {
+                  "@type": "/cosmos.crypto.ed25519.PubKey",
+                  "key": "l/Frqi7jlPKaVliwr40z2DpYpz7pUTJoYp/nFgPZXx0="
+                },
+                "value": {
+                  "denom": "uneutaro",
+                  "amount": "1000000"
+                }
+              }
+            ],
+            "memo": "c5d9eda3620d043cdab03cf80ed798c59d7450dc@38.242.135.246:26656",
+            "timeout_height": "0",
+            "extension_options": [],
+            "non_critical_extension_options": []
+          },
+          "auth_info": {
+            "signer_infos": [
+              {
+                "public_key": {
+                  "@type": "/cosmos.crypto.secp256k1.PubKey",
+                  "key": "AkxVWKsKqricQWv1Fkn3JsFekZUhqTdTYoBaza1D62K3"
+                },
+                "mode_info": {
+                  "single": {
+                    "mode": "SIGN_MODE_DIRECT"
+                  }
+                },
+                "sequence": "0"
+              }
+            ],
+            "fee": {
+              "amount": [],
+              "gas_limit": "200000",
+              "payer": "",
+              "granter": ""
+            }
+          },
+          "signatures": [
+            "nYxzm7LOBUeJhrrAEFScoP5v5gz3jiTILxLyQsqWNeUaZaITQPeAuovJ9x+3/uYwwAB6hIZKoG0hO+zj88Jhmg=="
+          ]
+        },
+        {
+          "body": {
+            "messages": [
+              {
+                "@type": "/cosmos.staking.v1beta1.MsgCreateValidator",
+                "description": {
+                  "moniker": "Royal",
+                  "identity": "79E14FB4E5BE4F30",
+                  "website": "",
+                  "security_contact": "",
+                  "details": ""
+                },
+                "commission": {
+                  "rate": "0.100000000000000000",
+                  "max_rate": "0.200000000000000000",
+                  "max_change_rate": "0.010000000000000000"
+                },
+                "min_self_delegation": "1",
+                "delegator_address": "neutaro1pe8fq9y2sl05m6evfeqesrrcrmqrky5kzrsr5w",
+                "validator_address": "neutarovaloper1pe8fq9y2sl05m6evfeqesrrcrmqrky5kc7a2e4",
+                "pubkey": {
+                  "@type": "/cosmos.crypto.ed25519.PubKey",
+                  "key": "cObqa4lN8q12cnSj+MV59HrAQQLHzIHV4jhyKNss6Ks="
+                },
+                "value": {
+                  "denom": "uneutaro",
+                  "amount": "1000000"
+                }
+              }
+            ],
+            "memo": "cb7f520a5b8cfec98bba385c3080e507f0b6868a@217.31.104.223:26656",
+            "timeout_height": "0",
+            "extension_options": [],
+            "non_critical_extension_options": []
+          },
+          "auth_info": {
+            "signer_infos": [
+              {
+                "public_key": {
+                  "@type": "/cosmos.crypto.secp256k1.PubKey",
+                  "key": "A91DA3kFcfW8ChHqXgjEeiPKbV/Yt6AHZxZx0UAhZ+YM"
+                },
+                "mode_info": {
+                  "single": {
+                    "mode": "SIGN_MODE_DIRECT"
+                  }
+                },
+                "sequence": "0"
+              }
+            ],
+            "fee": {
+              "amount": [],
+              "gas_limit": "200000",
+              "payer": "",
+              "granter": ""
+            }
+          },
+          "signatures": [
+            "m99Xxdo3P3YB3YMfApWgpFVmaPfmpJcl5DWQjo39JSEsB2XGFQ5Os3rkb69B6u+6upkhvNUPrYQyc2S2RZKYhg=="
+          ]
+        },
+        {
+          "body": {
+            "messages": [
+              {
+                "@type": "/cosmos.staking.v1beta1.MsgCreateValidator",
+                "description": {
+                  "moniker": "TimpiTap",
+                  "identity": "",
+                  "website": "",
+                  "security_contact": "",
+                  "details": ""
+                },
+                "commission": {
+                  "rate": "0.100000000000000000",
+                  "max_rate": "0.200000000000000000",
+                  "max_change_rate": "0.010000000000000000"
+                },
+                "min_self_delegation": "1",
+                "delegator_address": "neutaro120x4dsxgmttmp8p83a7jhqga2xngfy0l4pqh08",
+                "validator_address": "neutarovaloper120x4dsxgmttmp8p83a7jhqga2xngfy0l0ud7zu",
+                "pubkey": {
+                  "@type": "/cosmos.crypto.ed25519.PubKey",
+                  "key": "lTY+hc8GsbvQ+9UK/sKbPAUnIh4DwWQsRbErQgJkww8="
+                },
+                "value": {
+                  "denom": "uneutaro",
+                  "amount": "1000000"
+                }
+              }
+            ],
+            "memo": "d891af90afdcf3973f7dc44eef316dfe652ccb1c@165.140.242.64:26656",
+            "timeout_height": "0",
+            "extension_options": [],
+            "non_critical_extension_options": []
+          },
+          "auth_info": {
+            "signer_infos": [
+              {
+                "public_key": {
+                  "@type": "/cosmos.crypto.secp256k1.PubKey",
+                  "key": "AoREmPTO4GtIVbo+6KX0luXIil4sEfNQf1VwHnccrm8f"
+                },
+                "mode_info": {
+                  "single": {
+                    "mode": "SIGN_MODE_DIRECT"
+                  }
+                },
+                "sequence": "0"
+              }
+            ],
+            "fee": {
+              "amount": [],
+              "gas_limit": "200000",
+              "payer": "",
+              "granter": ""
+            }
+          },
+          "signatures": [
+            "qW8dkW/vVuTQdoqHrlMOpkZB9Qye+Jmo3WBOY/Auz0djksYqNMrhPeX+q/RSnHgCnrCsM1TTA83CrIX7rrorNw=="
+          ]
+        }
+      ]
+    },
+    "gov": {
+      "starting_proposal_id": "1",
+      "deposits": [],
+      "votes": [],
+      "proposals": [],
+      "deposit_params": {
+        "min_deposit": [
+          {
+            "denom": "uneutaro",
+            "amount": "2500000000"
+          }
+        ],
+        "max_deposit_period": "1209600s"
+      },
+      "voting_params": {
+        "voting_period": "1209600s"
+      },
+      "tally_params": {
+        "quorum": "0.400000000000000000",
+        "threshold": "0.500000000000000000",
+        "veto_threshold": "0.334000000000000000"
+      }
+    },
+    "ibc": {
+      "client_genesis": {
+        "clients": [],
+        "clients_consensus": [],
+        "clients_metadata": [],
+        "params": {
+          "allowed_clients": [
+            "06-solomachine",
+            "07-tendermint"
+          ]
+        },
+        "create_localhost": false,
+        "next_client_sequence": "0"
+      },
+      "connection_genesis": {
+        "connections": [],
+        "client_connection_paths": [],
+        "next_connection_sequence": "0",
+        "params": {
+          "max_expected_time_per_block": "30000000000"
+        }
+      },
+      "channel_genesis": {
+        "channels": [],
+        "acknowledgements": [],
+        "commitments": [],
+        "receipts": [],
+        "send_sequences": [],
+        "recv_sequences": [],
+        "ack_sequences": [],
+        "next_channel_sequence": "0"
+      }
+    },
+    "mint": {
+      "minter": {
+        "inflation": "0.130000000000000000",
+        "annual_provisions": "0.000000000000000000"
+      },
+      "params": {
+        "mint_denom": "uneutaro",
+        "inflation_rate_change": "0.130000000000000000",
+        "inflation_max": "0.000000000000000000",
+        "inflation_min": "0.000000000000000000",
+        "goal_bonded": "0.670000000000000000",
+        "blocks_per_year": "6311520"
+      }
+    },
+    "params": null,
+    "slashing": {
+      "params": {
+        "signed_blocks_window": "5000",
+        "min_signed_per_window": "0.050000000000000000",
+        "downtime_jail_duration": "600s",
+        "slash_fraction_double_sign": "0.050000000000000000",
+        "slash_fraction_downtime": "0.010000000000000000"
+      },
+      "signing_infos": [],
+      "missed_blocks": []
+    },
+    "staking": {
+      "params": {
+        "unbonding_time": "7776000s",
+        "max_validators": 55,
+        "max_entries": 7,
+        "historical_entries": 10000,
+        "bond_denom": "uneutaro"
+      },
+      "last_total_power": "0",
+      "last_validator_powers": [],
+      "validators": [],
+      "delegations": [],
+      "unbonding_delegations": [],
+      "redelegations": [],
+      "exported": false
+    },
+    "transfer": {
+      "port_id": "transfer",
+      "denom_traces": [],
+      "params": {
+        "send_enabled": true,
+        "receive_enabled": true
+      }
+    },
+    "upgrade": {},
+    "vesting": {},
+    "wasm": {
+      "params": {
+        "code_upload_access": {
+          "permission": "Everybody",
+          "address": ""
+        },
+        "instantiate_default_permission": "Everybody"
+      },
+      "codes": [],
+      "contracts": [],
+      "sequences": [],
+      "gen_msgs": []
+    }
+  }
+}

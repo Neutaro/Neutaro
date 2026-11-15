@@ -271,12 +271,13 @@ sudo ln -sf "$HOME/.Neutaro/cosmovisor/current/bin/Neutaro" /usr/local/bin/Neuta
 MONIKER="YourMoniker"
 Neutaro init "$MONIKER" --chain-id Neutaro-1
 
-curl -fsSL http://154.26.153.186/genesis.json > "$HOME/.Neutaro/config/genesis.json"
+curl -fsSL https://raw.githubusercontent.com/Neutaro/Neutaro/main/Instructions/genesis.json -o "$HOME/.Neutaro/config/genesis.json"
 sha256sum "$HOME/.Neutaro/config/genesis.json"
 ```
 
-**Verify before you trust it.** Genesis is served over plaintext HTTP from a bare IP with no published
-checksum — a tampered genesis gives you a node that silently follows the wrong chain.
+**Verify before you trust it.** The genesis now lives in this repo ([`Instructions/genesis.json`](Instructions/genesis.json));
+the old bare-IP host `154.26.153.186` is offline. Always check the hash below — a tampered genesis gives
+you a node that silently follows the wrong chain.
 
 Known-good as of 2026-08-14:
 

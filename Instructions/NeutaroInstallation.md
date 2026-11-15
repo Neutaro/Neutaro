@@ -135,13 +135,15 @@ Why these values:
 Download the genesis and **verify it** — do not skip the checksum:
 
 ```shell
-curl -f http://154.26.153.186/genesis.json > ~/.Neutaro/config/genesis.json
+curl -fL https://raw.githubusercontent.com/Neutaro/Neutaro/main/Instructions/genesis.json -o ~/.Neutaro/config/genesis.json
 sha256sum ~/.Neutaro/config/genesis.json
 # must print:
 # 78724fe90e5bd1f2abd0186bd0c33325e3c190d8e417741a42ff0c7fbdf2fc2d
 ```
 
-If the hash differs, stop — do not start a node on an unverified genesis.
+If the hash differs, stop — do not start a node on an unverified genesis. (The old genesis host
+`154.26.153.186` is offline; with `>` a failed download leaves an empty file, which is why its hash
+looked wrong. The file now lives in this repo: [`genesis.json`](genesis.json).)
 
 ## 7. Sync the node
 
